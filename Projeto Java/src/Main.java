@@ -42,7 +42,7 @@ public class Main {
             if (comando == GERENCIAR_CLIENTE)
             {
                 try {
-                    Cliente cliente = new Cliente("Arthur", 15);
+                    Cliente cliente = new Cliente("Arthur", 15, "Rua 23", "00000000", "(19)xxxxxxx");
                     gerenciadorClientes.adicionar(cliente);
                     gerenciadorClientes.mostrarTodos();
                 }
