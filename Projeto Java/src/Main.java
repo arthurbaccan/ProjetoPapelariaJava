@@ -45,6 +45,7 @@ public class Main {
                     Cliente cliente = new Cliente("Arthur", 15, "Rua 23", "00000000", "(19)xxxxxxx");
                     gerenciadorClientes.adicionar(cliente);
                     gerenciadorClientes.mostrarTodos();
+                    gerenciadorClientes.pesquisarPorNome("Art");
                 }
                 catch (IdadeInvalidaException e)
                 {
