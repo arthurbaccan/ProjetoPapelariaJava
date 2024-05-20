@@ -16,8 +16,8 @@ public class Cliente extends Pessoa{
                 "endereco='" + endereco + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", telefone='" + telefone + '\'' +
-                ", nome='" + nome + '\'' +
-                ", idade=" + idade +
+                ", nome='" + super.getNome() + '\'' +
+                ", idade=" + super.getIdade() +
                 '}';
     }
 

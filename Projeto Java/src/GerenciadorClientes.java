@@ -30,6 +30,15 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
         }
     }
 
+    public void pesquisarPorNome()
+    {
+        for(Cliente cliente : listaClientes) {
+
+            cliente.exibir();
+        }
+    }
+
+
     @Override
     public void mostrarComandos() {
         System.out.println("Comandos para gerenciar Clientes:");

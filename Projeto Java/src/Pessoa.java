@@ -1,10 +1,18 @@
 public  abstract class Pessoa implements IPessoa {
-    String nome;
-    int idade;
+    private String nome;
+    private int idade;
 
     public Pessoa(String nome, int idade) {
         setNome(nome);
         setIdade(idade);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getIdade() {
+        return idade;
     }
 
     public void setNome(String nome) {
