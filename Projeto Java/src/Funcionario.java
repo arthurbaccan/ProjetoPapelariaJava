@@ -9,6 +9,10 @@ public class Funcionario extends Pessoa implements IPessoa{
         this.endereco = endereco;
         this.codigoDeRegistro = codigoDeRegistro;
         this.salario = salario;
+        if(salario<=0) {
+            throw new SalarioInvalidoException();
+        }
+
     }
 
     @Override
