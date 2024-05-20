@@ -30,11 +30,11 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
         }
     }
 
-    public void pesquisarPorNome()
+    public void pesquisarPorNome(String nome)
     {
         for(Cliente cliente : listaClientes) {
-
-            cliente.exibir();
+            if (cliente.nome.startsWith(nome))
+                cliente.exibir();
         }
     }
 
