@@ -12,11 +12,14 @@ public class Funcionario extends Pessoa implements IPessoa{
         if(salario<=0) {
             throw new SalarioInvalidoException();
         }
+        if(codigoDeRegistro<=0) {
+            throw new RegistroFuncionarioException();
+        }
 
     }
 
     @Override
     public void exibir() {
-        System.out.println("\nFuncionário: "+nome+"\nIdade: "+idade+"\nEndereco: "+endereco+"\nCodigo de Registro: "+codigoDeRegistro+"\nSalario: "+salario);
+        System.out.println("\nFuncionário: "+nome+"\nIdade: "+idade+"\nEndereco: "+endereco+"\nCódigo de Registro: "+codigoDeRegistro+"\nSalário: "+salario);
     }
 }
