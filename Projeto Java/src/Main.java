@@ -30,8 +30,6 @@ public class Main {
 
         System.out.println("Bem vindo ao sistema da papelaria Bacana!");
 
-        GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
-
         int comando = 0;
 
         while (comando != SAIR)
@@ -43,7 +41,7 @@ public class Main {
             {
                 try {
                     Cliente cliente = new Cliente("Arthur", 15, "Rua 23", "00000000", "(19)xxxxxxx");
-                    gerenciadorClientes.adicionar(cliente);
+                    GerenciadorClientes.adicionar(cliente);
                     gerenciadorClientes.mostrarTodos();
                     gerenciadorClientes.pesquisarPorNome("Art");
                 }

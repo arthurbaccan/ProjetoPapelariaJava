@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public class GerenciadorClientes implements IGerenciador<Cliente>{
-    private ArrayList<Cliente> listaClientes;
+public abstract class GerenciadorClientes {
+    private static ArrayList<Cliente> listaClientes;
 
     private static final int ADICIONAR_CLIENTE = 1;
     private static final int REMOVER_CLIENTE = 2;
@@ -9,30 +9,26 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
     private static final int MOSTRAR_TODOS = 4;
     private static final int SAIR = 5;
 
-    public GerenciadorClientes() {
-        this.listaClientes = new ArrayList<>();
-    }
 
 
 
-    @Override
-    public void adicionar(Cliente cliente) {
+    public static void adicionar(Cliente cliente) {
         listaClientes.add(cliente);
     }
 
     @Override
-    public void remover(Cliente cliente) {
+    public static void remover(Cliente cliente) {
         listaClientes.remove(cliente);
     }
 
     @Override
-    public void mostrarTodos() {
+    public static void mostrarTodos() {
         for(Cliente cliente : listaClientes) {
             cliente.exibir();
         }
     }
 
-    public void pesquisarPorNome(String nome)
+    public static void pesquisarPorNome(String nome)
     {
         System.out.println("Resultados da pesquisa:");
         for(Cliente cliente : listaClientes) {
@@ -41,7 +37,7 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
         }
     }
 
-    public void getClienteMaisVelho()
+    public static void getClienteMaisVelho()
     {
         Cliente clienteEscolhido = null;
         for(Cliente cliente : listaClientes) {
