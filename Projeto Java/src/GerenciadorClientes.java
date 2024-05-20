@@ -13,6 +13,8 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
         this.listaClientes = new ArrayList<>();
     }
 
+
+
     @Override
     public void adicionar(Cliente cliente) {
         listaClientes.add(cliente);
@@ -38,6 +40,18 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
                 cliente.exibir();
         }
     }
+
+    public void getClienteMaisVelho()
+    {
+        Cliente clienteEscolhido = null;
+        for(Cliente cliente : listaClientes) {
+            if (clienteEscolhido == null)
+            {
+
+            }
+        }
+    }
+
 
 
     @Override
