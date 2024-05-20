@@ -1,4 +1,4 @@
 public interface IPessoa {
 
-    void exibir();
+    public void exibir();
 }
