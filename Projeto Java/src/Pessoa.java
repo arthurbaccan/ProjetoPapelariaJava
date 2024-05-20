@@ -3,8 +3,8 @@ public  abstract class Pessoa implements IPessoa {
     int idade;
 
     public Pessoa(String nome, int idade) {
-        this.nome = nome;
-        this.idade = idade;
+        setNome(nome);
+        setIdade(idade);
     }
 
     public void setNome(String nome) {
