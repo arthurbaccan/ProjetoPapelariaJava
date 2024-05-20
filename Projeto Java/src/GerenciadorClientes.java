@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class GerenciadorClientes {
-    private static ArrayList<Cliente> listaClientes;
+    private static ArrayList<Cliente> listaClientes = new ArrayList<>();
 
     private static final int ADICIONAR_CLIENTE = 1;
     private static final int REMOVER_CLIENTE = 2;
@@ -16,12 +16,12 @@ public abstract class GerenciadorClientes {
         listaClientes.add(cliente);
     }
 
-    @Override
+
     public static void remover(Cliente cliente) {
         listaClientes.remove(cliente);
     }
 
-    @Override
+
     public static void mostrarTodos() {
         for(Cliente cliente : listaClientes) {
             cliente.exibir();
@@ -48,12 +48,9 @@ public abstract class GerenciadorClientes {
         }
     }
 
-
-
-    @Override
     public void mostrarComandos() {
         System.out.println("Comandos para gerenciar Clientes:");
-        System.out.println("Gerenciar clientes ["+ ADICIONAR_CLIENTE +"]");
+        System.out.println("Remover cliente ["+ ADICIONAR_CLIENTE +"]");
         System.out.println("Gerenciar funcionários ["+ REMOVER_CLIENTE +"]");
         System.out.println("Gerenciar produtos ["+ PESQUISAR_CLIENTE +"]");
         System.out.println("Sair ["+ MOSTRAR_TODOS +"]");

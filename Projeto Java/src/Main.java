@@ -42,8 +42,8 @@ public class Main {
                 try {
                     Cliente cliente = new Cliente("Arthur", 15, "Rua 23", "00000000", "(19)xxxxxxx");
                     GerenciadorClientes.adicionar(cliente);
-                    gerenciadorClientes.mostrarTodos();
-                    gerenciadorClientes.pesquisarPorNome("Art");
+                    GerenciadorClientes.mostrarTodos();
+                    GerenciadorClientes.pesquisarPorNome("Art");
                 }
                 catch (IdadeInvalidaException e)
                 {
@@ -53,6 +53,8 @@ public class Main {
                 {
                     System.out.println(e.getMessage());
                 }
+            } else if (comando == GERENCIAR_FUNCIONARIO) {
+
             }
 
         }
