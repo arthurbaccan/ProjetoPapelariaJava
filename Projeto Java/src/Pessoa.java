@@ -1,6 +1,6 @@
 public  abstract class Pessoa implements IPessoa {
-    private String nome;
-    private int idade;
+    protected String nome;
+    protected int idade;
 
     public Pessoa(String nome, int idade) {
         setNome(nome);

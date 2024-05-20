@@ -26,7 +26,7 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
     @Override
     public void mostrarTodos() {
         for(Cliente cliente : listaClientes) {
-            cliente.exibir();
+
         }
     }
 
