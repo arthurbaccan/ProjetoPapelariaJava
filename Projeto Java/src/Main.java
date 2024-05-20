@@ -34,7 +34,7 @@ public class Main {
 
         int comando = 0;
 
-        while (comando != 4)
+        while (comando != SAIR)
         {
             mostrarComandos();
             comando = lerComando();
