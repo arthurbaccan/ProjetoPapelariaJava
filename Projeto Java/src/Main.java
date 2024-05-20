@@ -4,9 +4,9 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    private static final int GERENCIAR_CLIENTE = 1;
-    private static final int GERENCIAR_FUNCIONARIO = 2;
-    private static final int GERENCIAR_PRODUTO = 3;
+    private static final int GERENCAIR_CLIENTE = 1;
+    private static final int GERENCAIR_FUNCIONARIO = 2;
+    private static final int GERENCAIR_PRODUTO = 3;
     private static final int SAIR = 4;
 
     private static Scanner teclado = new Scanner(System.in);
@@ -14,9 +14,9 @@ public class Main {
     public static void mostrarComandos()
     {
         System.out.println("Comandos disponíveis:");
-        System.out.println("Gerenciar clientes ["+ GERENCIAR_CLIENTE +"]");
-        System.out.println("Gerenciar funcionários ["+ GERENCIAR_FUNCIONARIO +"]");
-        System.out.println("Gerenciar produtos ["+ GERENCIAR_PRODUTO +"]");
+        System.out.println("Gerenciar clientes ["+ GERENCAIR_CLIENTE +"]");
+        System.out.println("Gerenciar funcionários ["+ GERENCAIR_FUNCIONARIO +"]");
+        System.out.println("Gerenciar produtos ["+ GERENCAIR_PRODUTO +"]");
         System.out.println("Sair ["+ SAIR +"]");
     }
 
@@ -39,7 +39,7 @@ public class Main {
             mostrarComandos();
             comando = lerComando();
 
-            if (comando == GERENCIAR_CLIENTE)
+            if (comando == GERENCAIR_CLIENTE)
             {
                 try {
                     Cliente cliente = new Cliente("Arthur", 15);
