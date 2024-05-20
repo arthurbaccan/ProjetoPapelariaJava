@@ -26,12 +26,13 @@ public class GerenciadorClientes implements IGerenciador<Cliente>{
     @Override
     public void mostrarTodos() {
         for(Cliente cliente : listaClientes) {
-
+            cliente.exibir();
         }
     }
 
     public void pesquisarPorNome(String nome)
     {
+        System.out.println("Resultados da pesquisa:");
         for(Cliente cliente : listaClientes) {
             if (cliente.nome.startsWith(nome))
                 cliente.exibir();
