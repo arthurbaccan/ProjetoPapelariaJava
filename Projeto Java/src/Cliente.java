@@ -1,12 +1,22 @@
 public class Cliente extends Pessoa{
-    public Cliente(String nome, int idade) {
+    private String endereco;
+    private String cpf;
+    private String telefone;
+
+    public Cliente(String nome, int idade, String endereco, String cpf, String telefone) {
         super(nome, idade);
+        this.endereco = endereco;
+        this.cpf = cpf;
+        this.telefone = telefone;
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
-                "nome='" + nome + '\'' +
+                "endereco='" + endereco + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", nome='" + nome + '\'' +
                 ", idade=" + idade +
                 '}';
     }
