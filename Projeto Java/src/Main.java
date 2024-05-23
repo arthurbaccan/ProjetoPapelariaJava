@@ -40,8 +40,10 @@ public class Main {
             switch (comando)
             {
                 case GERENCIAR_CLIENTE:
-                    while (comando != SAIR)
+                    while (comando != GerenciadorClientes.SAIR)
                     {
+                        System.out.println();
+                        System.out.println("===========================================");
                         GerenciadorClientes.mostrarComandos();
                         comando = lerComando();
                         GerenciadorClientes.executarComando(comando, teclado);
