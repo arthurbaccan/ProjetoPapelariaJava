@@ -37,24 +37,28 @@ public class Main {
             mostrarComandos();
             comando = lerComando();
 
-            if (comando == GERENCIAR_CLIENTE)
+            switch (comando)
             {
-                try {
-                    Cliente cliente = new Cliente("Arthur", 15, "Rua 23", "00000000", "(19)xxxxxxx");
-                    GerenciadorClientes.adicionar(cliente);
-                    GerenciadorClientes.mostrarTodos();
-                    GerenciadorClientes.pesquisarPorNome("Art");
-                }
-                catch (IdadeInvalidaException e)
-                {
-                    System.out.println(e.getMessage());
-                }
-                catch (NomeVazioException e)
-                {
-                    System.out.println(e.getMessage());
-                }
-            } else if (comando == GERENCIAR_FUNCIONARIO) {
+                case GERENCIAR_CLIENTE:
+                    while (comando != SAIR)
+                    {
+                        GerenciadorClientes.mostrarComandos();
+                        comando = lerComando();
+                        GerenciadorClientes.executarComando(comando, teclado);
+                    }
 
+                /*case GERENCIAR_FUNCIONARIO:
+                    while (comando != SAIR)
+                    {
+                        comando = lerComando();
+                        GerenciadorFuncionario.executarComando(comando);
+                    }
+                case GERENCIAR_PRODUTO:
+                    while (comando != SAIR)
+                    {
+                        comando = lerComando();
+                        GerenciadorProduto.executarComando(comando);
+                   }*/
             }
 
         }
