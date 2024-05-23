@@ -108,11 +108,11 @@ public abstract class GerenciadorClientes {
         }
     }
 
-    public static void pesquisarPorNome(String nome)
+    public static void pesquisarPorNome(String nomeCli)
     {
         System.out.println("Resultados da pesquisa:");
         for(Cliente cliente : listaClientes) {
-            if (cliente.nome.startsWith(nome))
+            if (cliente.nome.startsWith(nomeCli))
                 cliente.exibir();
         }
     }
