@@ -50,7 +50,7 @@ public abstract class GerenciadorClientes {
                     System.out.println("Digite as letras iniciais do nome Cliente");
                     String nome = teclado.nextLine();
                     GerenciadorClientes.pesquisarPorNome(nome);
-                }
+                } break;
 
                 case MOSTRAR_TODOS:
                 {
@@ -115,16 +115,14 @@ public abstract class GerenciadorClientes {
             if (cliente.nome.startsWith(nomeCli))
                 cliente.exibir();
         }
+
     }
 
     public static void getClienteMaisVelho()
     {
         Cliente clienteEscolhido = null;
         for(Cliente cliente : listaClientes) {
-            if (clienteEscolhido == null)
-            {
 
-            }
         }
     }
 
