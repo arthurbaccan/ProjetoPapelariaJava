@@ -40,6 +40,7 @@ public class Main {
             switch (comando)
             {
                 case GERENCIAR_CLIENTE:
+                {
                     while (comando != GerenciadorClientes.SAIR)
                     {
                         System.out.println();
@@ -48,6 +49,20 @@ public class Main {
                         comando = lerComando();
                         GerenciadorClientes.executarComando(comando, teclado);
                     }
+                } break;
+
+                case GERENCIAR_PRODUTO:
+                {
+                    while (comando != GerenciadorProdutos.SAIR)
+                    {
+                        System.out.println();
+                        System.out.println("===========================================");
+                        GerenciadorProdutos.mostrarComandos();
+                        comando = lerComando();
+                        GerenciadorProdutos.executarComando(comando, teclado);
+                    }
+                }
+
 
                 /*case GERENCIAR_FUNCIONARIO:
                     while (comando != SAIR)
