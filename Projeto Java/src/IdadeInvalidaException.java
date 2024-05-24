@@ -1,6 +1,6 @@
 public class IdadeInvalidaException extends RuntimeException {
     @Override
     public String getMessage() {
-        return "A idade deve estar entre 1 e 150";
+        return "A idade deve ser maior que 0";
     }
 }

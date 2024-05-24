@@ -15,20 +15,30 @@ public  abstract class Pessoa implements IPessoa {
         return idade;
     }
 
-    public void setNome(String nome) {
+    public static void verificaNome(String nome)
+    {
         if (nome.isEmpty())
         {
             throw new NomeVazioException();
         }
+    }
+
+    public static void verificaIdade(int idade)
+    {
+        if (idade < 0)
+        {
+            throw new IdadeInvalidaException();
+        }
+    }
+
+    public void setNome(String nome) {
+        verificaNome(nome);
 
         this.nome = nome;
     }
 
     public void setIdade(int idade) {
-        if (idade < 1 || idade > 120)
-        {
-            throw new IdadeInvalidaException();
-        }
+        verificaIdade(idade);
 
         this.idade = idade;
     }

@@ -30,8 +30,10 @@ public abstract class GerenciadorClientes {
                     teclado.nextLine();
                     System.out.println("Digite o nome do Cliente");
                     String nome = teclado.nextLine();
+                    Pessoa.verificaNome(nome);
                     System.out.println("Digite a idade");
                     int idade = teclado.nextInt();
+                    Pessoa.verificaIdade(idade);
                     System.out.println("Digite o endereço");
                     teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
                     String endereco = teclado.nextLine();
@@ -51,6 +53,8 @@ public abstract class GerenciadorClientes {
                     String nome = teclado.nextLine();
                     GerenciadorClientes.pesquisarPorNome(nome);
                 } break;
+
+
 
                 case MOSTRAR_TODOS:
                 {
