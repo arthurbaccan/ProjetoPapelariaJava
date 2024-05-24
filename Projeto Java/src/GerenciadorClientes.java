@@ -140,6 +140,16 @@ public abstract class GerenciadorClientes{
 
                 }break;
 
+                case MOSTRAR_MEDIA_IDADE: {
+                    int i = listaClientes.size() / 2;
+                    double idade = 0;
+                    for(Cliente cliente: listaClientes)
+                    {
+                        cliente.idade += idade;
+                    }
+                    System.out.println("Media: " + idade/i);
+                }
+
                 case PESQUISAR_CLIENTE:
                 {
                     teclado.nextLine();
