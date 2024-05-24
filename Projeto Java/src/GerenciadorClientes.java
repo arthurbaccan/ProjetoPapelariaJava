@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public abstract class GerenciadorClientes {
+public abstract class GerenciadorClientes{
     private static ArrayList<Cliente> listaClientes = new ArrayList<>();
     private static String input;
 
@@ -46,6 +46,100 @@ public abstract class GerenciadorClientes {
                     GerenciadorClientes.adicionar(clNovo);
                 } break;
 
+                case REMOVER_CLIENTE:
+                {
+                    
+                    Cliente clARemover = null;
+                    teclado.nextLine();
+                    System.out.println("Digite o CPF");
+                    String cpf = teclado.nextLine();
+                    System.out.println("Removendo o Cliente::");
+                    for(Cliente cliente : listaClientes) {
+                        if (cliente.cpf.equals(cpf)){
+                            cliente.exibir();
+                            clARemover = cliente;
+                        }
+                    }
+
+                    GerenciadorClientes.remover(clARemover);
+
+                } break;
+
+                case MOSTRAR_CLIENTE_MAIS_VELHO:
+                {
+                    int maiorIdade = -1;
+                    Cliente cliMaisVelho = null;
+                    for(Cliente cliente : listaClientes) {
+                        if (cliente.idade > maiorIdade)
+                        {
+                            cliMaisVelho = cliente;
+                            maiorIdade = cliente.idade;
+                        }
+
+                    }
+
+                    System.out.println("Cliente mais matioli(idoso): ");
+                    try {
+                        cliMaisVelho.exibir();
+                    }
+                    catch (NullPointerException e)
+                    {
+                        System.out.println("Nenhum cliente encontrado!");
+                    }
+
+
+                } break;
+
+                case MOSTRAR_CLIENTE_MAIS_NOVO: {
+                    int menorIdade = -1;
+                    Cliente clienteMaisNovo = null;
+                    for (Cliente cliente : listaClientes) {
+                        if (menorIdade == -1)
+                        {
+                            menorIdade = cliente.idade;
+                        }
+                        else if (cliente.idade < menorIdade) {
+                            clienteMaisNovo = cliente;
+                            menorIdade = cliente.idade;
+                        }
+
+                    }
+
+                    System.out.println("Cliente mais Arthur(criança): ");
+                    try {
+                        clienteMaisNovo.exibir();
+                    } catch (NullPointerException e) {
+                        System.out.println("Nenhum cliente encontrado!");
+                    }
+
+                }break;
+
+
+                case MOSTRAR_MAIORES_60: {
+                    int numerozin=0;
+                    for(Cliente cliente: listaClientes)
+                    {
+                        if(cliente.idade > 60) {
+                            numerozin++;
+                        }
+                    }
+                    System.out.println("Clientes com mais de 60: "+numerozin);
+
+
+                }break;
+
+                case MOSTRAR_MENORES_18: {
+                    int numerozin=0;
+                    for(Cliente cliente: listaClientes)
+                    {
+                        if(cliente.idade < 18) {
+                            numerozin++;
+                        }
+                    }
+                    System.out.println("Clientes com menos de 18: "+numerozin);
+
+                }break;
+
                 case PESQUISAR_CLIENTE:
                 {
                     teclado.nextLine();
@@ -53,7 +147,6 @@ public abstract class GerenciadorClientes {
                     String nome = teclado.nextLine();
                     GerenciadorClientes.pesquisarPorNome(nome);
                 } break;
-
 
 
                 case MOSTRAR_TODOS:

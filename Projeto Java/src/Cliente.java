@@ -1,6 +1,6 @@
 public class Cliente extends Pessoa{
     private String endereco;
-    private String cpf;
+    protected String cpf;
     private String telefone;
 
     public Cliente(String nome, int idade, String endereco, String cpf, String telefone) {
