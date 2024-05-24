@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public abstract class GerenciadorClientes{
     private static ArrayList<Cliente> listaClientes = new ArrayList<>();
-    private static String input;
 
     private static final int ADICIONAR_CLIENTE = 1;
     private static final int REMOVER_CLIENTE = 2;
