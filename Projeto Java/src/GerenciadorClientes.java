@@ -57,6 +57,7 @@ public abstract class GerenciadorClientes{
                         if (cliente.cpf.equals(cpf)){
                             cliente.exibir();
                             clARemover = cliente;
+                            break;
                         }
                     }
 
