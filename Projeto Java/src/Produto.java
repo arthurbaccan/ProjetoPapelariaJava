@@ -1,7 +1,7 @@
 public class Produto {
     protected int codigoProduto;
-    private String nome, descricao;
-    private double preco;
+    protected String nome, descricao;
+    protected double preco;
     private boolean importado;
     private static int maiorCodigo = 0;
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class GerenciadorProdutos {
@@ -37,7 +38,7 @@ public class GerenciadorProdutos {
                 String nome = teclado.nextLine();
                 Pessoa.verificaNome(nome);
                 System.out.println("Digite a descrição");
-                teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
+                //teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
                 String descricao = teclado.nextLine();
                 System.out.println("Digite o preço");
                 double preco = teclado.nextDouble();
@@ -75,8 +76,66 @@ public class GerenciadorProdutos {
                 }
                 GerenciadorProdutos.remover(produtoARemover);
             }
+
+            case MOSTRAR_TODOS:
+            {
+                GerenciadorProdutos.mostrarTodos();
+            } break;
+
+            case PESQUISAR_PRODUTO_NOME:
+            {
+                teclado.nextLine();
+                System.out.println("Digite as letras iniciais do nome do produto");
+                String nome = teclado.nextLine();
+                GerenciadorProdutos.pesquisarPorNome(nome);
+            } break;
+
+            case PESQUISAR_PRODUTO_DESCRICAO:
+            {
+                teclado.nextLine();
+                System.out.println("Digite o começo da descricão do produto");
+                String descricao = teclado.nextLine();
+                GerenciadorProdutos.pesquisarPorDescricao(descricao);
+            } break;
+
+            case PESQUISAR_PRODUTO_PRECO:
+            {
+
+                System.out.println("Digite o preço do produto");
+                double preco = teclado.nextDouble();
+                GerenciadorProdutos.pesquisarPorPreco(preco);
+            } break;
+
         }
     }
+
+    public static void pesquisarPorDescricao(String descricaoProduto)
+    {
+        System.out.println("Resultados da pesquisa:");
+        for(Produto produto : listaProdutos) {
+            if (produto.descricao.startsWith(descricaoProduto))
+                produto.exibir();
+        }
+    }
+
+    public static void pesquisarPorPreco(double preco)
+    {
+        System.out.println("Resultados da pesquisa:");
+        for(Produto produto : listaProdutos) {
+            if (produto.preco >= preco-0.001 && produto.preco <= preco+0.001) // margem de erro pra casas decimais.
+                produto.exibir();
+        }
+    }
+
+    public static void pesquisarPorNome(String nomeProduto)
+    {
+        System.out.println("Resultados da pesquisa:");
+        for(Produto produto : listaProdutos) {
+            if (produto.nome.startsWith(nomeProduto))
+                produto.exibir();
+        }
+    }
+
 
     private static void adicionar(Produto produtoNovo)
     {
@@ -88,9 +147,18 @@ public class GerenciadorProdutos {
         listaProdutos.remove(produtoNovo);
     }
 
+    private static void mostrarTodos()
+    {
+        for (Produto produto : listaProdutos)
+        {
+            produto.exibir();
+        }
+    }
+
+
     public static void mostrarComandos() {
         System.out.println("Comandos para gerenciar Produtos:");
-        System.out.println("Adicionar PRODUTO ["+ ADICIONAR_PRODUTO +"]");
+        System.out.println("Adicionar produto ["+ ADICIONAR_PRODUTO +"]");
         System.out.println("Remover produto ["+ REMOVER_PRODUTO +"]");
         System.out.println("Pesquisar produto por nome ["+ PESQUISAR_PRODUTO_NOME +"]");
         System.out.println("Pesquisar produto por descrição ["+ PESQUISAR_PRODUTO_DESCRICAO +"]");
