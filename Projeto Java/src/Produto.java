@@ -14,5 +14,20 @@ public class Produto {
         this.codigoProduto = Produto.maiorCodigo;
     }
 
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "codigoProduto=" + codigoProduto +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", preco=" + preco +
+                ", importado=" + importado +
+                '}';
+    }
+
+    public void exibir()
+    {
+        System.out.println(this);
+    }
 
 }

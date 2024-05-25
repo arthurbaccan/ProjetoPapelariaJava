@@ -60,24 +60,31 @@ public class GerenciadorProdutos {
                 }
             } break;
 
-            case REMOVER_PRODUTO:
+            case REMOVER_PRODUTO: {
                 teclado.nextLine();
                 System.out.println("Digite o código do produto a ser removido");
                 int codigo = teclado.nextInt();
                 Produto produtoARemover = null;
-                for(Produto produto : listaProdutos) {
-                    if (produto.codigoProduto == codigo){
+                for (Produto produto : listaProdutos) {
+                    if (produto.codigoProduto == codigo) {
                         produto.exibir();
                         produtoARemover = produto;
                         break;
                     }
                 }
+                GerenciadorProdutos.remover(produtoARemover);
+            }
         }
     }
 
     private static void adicionar(Produto produtoNovo)
     {
         listaProdutos.add(produtoNovo);
+    }
+
+    private static void remover(Produto produtoNovo)
+    {
+        listaProdutos.remove(produtoNovo);
     }
 
     public static void mostrarComandos() {
