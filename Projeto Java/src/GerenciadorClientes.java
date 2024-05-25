@@ -52,7 +52,7 @@ public abstract class GerenciadorClientes{
                     teclado.nextLine();
                     System.out.println("Digite o CPF");
                     String cpf = teclado.nextLine();
-                    System.out.println("Removendo o Cliente::");
+                    System.out.println("Removendo o Cliente:");
                     for(Cliente cliente : listaClientes) {
                         if (cliente.cpf.equals(cpf)){
                             cliente.exibir();

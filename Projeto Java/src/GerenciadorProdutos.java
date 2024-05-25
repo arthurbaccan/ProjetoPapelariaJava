@@ -65,6 +65,7 @@ public class GerenciadorProdutos {
                 System.out.println("Digite o código do produto a ser removido");
                 int codigo = teclado.nextInt();
                 Produto produtoARemover = null;
+                System.out.println("Removendo o produto:");
                 for (Produto produto : listaProdutos) {
                     if (produto.codigoProduto == codigo) {
                         produto.exibir();
