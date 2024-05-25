@@ -51,6 +51,18 @@ public class Main {
                     }
                 } break;
 
+                case GERENCIAR_FUNCIONARIO:
+                {
+                    while (comando != GerenciadorFuncionarios.SAIR)
+                    {
+                        System.out.println();
+                        System.out.println("===========================================");
+                        GerenciadorFuncionarios.mostrarComandos();
+                        comando = lerComando();
+                        GerenciadorFuncionarios.executarComando(comando, teclado);
+                    }
+                }
+
                 case GERENCIAR_PRODUTO:
                 {
                     while (comando != GerenciadorProdutos.SAIR)
