@@ -1,5 +1,5 @@
 public class Produto {
-    private int codigoProduto;
+    protected int codigoProduto;
     private String nome, descricao;
     private double preco;
     private boolean importado;

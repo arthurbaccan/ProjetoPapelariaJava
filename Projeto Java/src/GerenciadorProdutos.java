@@ -41,6 +41,7 @@ public class GerenciadorProdutos {
                 String descricao = teclado.nextLine();
                 System.out.println("Digite o preço");
                 double preco = teclado.nextDouble();
+                teclado.nextLine();
                 System.out.println("É importado? [s/n]");
                 String importado = teclado.nextLine();
                 try {
@@ -58,6 +59,19 @@ public class GerenciadorProdutos {
                     System.out.println();
                 }
             } break;
+
+            case REMOVER_PRODUTO:
+                teclado.nextLine();
+                System.out.println("Digite o código do produto a ser removido");
+                int codigo = teclado.nextInt();
+                Produto produtoARemover = null;
+                for(Produto produto : listaProdutos) {
+                    if (produto.codigoProduto == codigo){
+                        produto.exibir();
+                        produtoARemover = produto;
+                        break;
+                    }
+                }
         }
     }
 
