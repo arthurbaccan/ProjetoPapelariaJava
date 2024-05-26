@@ -22,29 +22,6 @@ public class Main {
         System.out.println();
     }
 
-    public static String nomeMain() {
-        teclado.nextLine();
-        System.out.println("Digite o nome do Funcionário");
-        String nomeMain = teclado.nextLine();
-        Pessoa.verificaNome(nomeMain);
-        return nomeMain;
-    }
-
-    public static int idadeMain() {
-        System.out.println("Digite a idade");
-        int idadeMain = teclado.nextInt();
-        Pessoa.verificaIdade(idadeMain);
-        return idadeMain;
-    }
-
-    public static String enderecoMain() {
-        teclado.nextLine();
-        System.out.println("Digite o endereço");
-        String enderecoMain = teclado.nextLine();
-        Funcionario.verificaEndereco(enderecoMain);
-        return enderecoMain;
-    }
-
     public static void mostrarComandos()
     {
         System.out.println("Comandos disponíveis:");

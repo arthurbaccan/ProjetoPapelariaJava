@@ -17,23 +17,22 @@ public abstract class GerenciadorFuncionarios {
             switch(comando) {
                 case ADICIONAR_FUNCIONARIO: {
 
-                    String nome = Main.nomeMain();
-                    Integer idade = Main.idadeMain();
-                    String endereco = Main.enderecoMain();
+                    String nome = GerenciadorClientes.lerNome(teclado);
+                    int idade = GerenciadorClientes.lerIdade(teclado);
+                    String endereco = GerenciadorClientes.lerEndereco(teclado);
                     System.out.println("Digite o código de resgitro");
                     String codigoDeRegistro = teclado.nextLine();
                     Funcionario.verificaCodigoDeRegistro(codigoDeRegistro);
 
                     double salario=0;
-                    for(int a=0; a==0;) {
+                    while (true) {
                         System.out.println("Digite o salário");
                         String salarioString = teclado.nextLine();
 
                         try {
-                            salario = Double.valueOf(salarioString);
-                            a++;
-                        }
-                        catch (NumberFormatException e) {
+                            salario = Double.parseDouble(salarioString);
+                            break;
+                        } catch (NumberFormatException e) {
                             Main.mostrarErro("Salário deve ser um número!");
                         }
                     }

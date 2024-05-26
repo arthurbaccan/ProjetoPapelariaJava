@@ -16,6 +16,29 @@ public abstract class GerenciadorClientes{
     private static final int MOSTRAR_TODOS = 9;
     public static final int SAIR = 10;
 
+    public static String lerNome(Scanner teclado) {
+        teclado.nextLine();
+        System.out.println("Digite o nome do Funcionário");
+        String nome = teclado.nextLine();
+        Pessoa.verificaNome(nome);
+        return nome;
+    }
+
+    public static int lerIdade(Scanner teclado) {
+        System.out.println("Digite a idade");
+        int idade = teclado.nextInt();
+        Pessoa.verificaIdade(idade);
+        return idade;
+    }
+
+    public static String lerEndereco(Scanner teclado) {
+        teclado.nextLine();
+        System.out.println("Digite o endereço");
+        String endereco = teclado.nextLine();
+        Funcionario.verificaEndereco(endereco);
+        return endereco;
+    }
+
 
     public static void executarComando(int comando, Scanner teclado)
     {
@@ -26,9 +49,9 @@ public abstract class GerenciadorClientes{
             {
                 case ADICIONAR_CLIENTE:
                 {
-                    String nome = Main.nomeMain();
-                    Integer idade = Main.idadeMain();
-                    String endereco = Main.enderecoMain();
+                    String nome = lerNome(teclado);
+                    int idade = lerIdade(teclado);
+                    String endereco = lerEndereco(teclado);
                     System.out.println("Digite o CPF");
                     String cpf = teclado.nextLine();
                     Cliente.checaCPF(cpf);
