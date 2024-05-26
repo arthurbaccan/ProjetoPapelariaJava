@@ -174,80 +174,40 @@ public abstract class GerenciadorClientes{
         }
         catch (IdadeInvalidaException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
         catch (NomeVazioException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
         catch (InputMismatchException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println("Digite um número no campo!");
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro("Digite um número no campo!");
         }
 
         catch (CPFInvalidoException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
         catch (TelefoneInvalidoException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
         catch (EnderecoVazioException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
         catch (TelefoneVazioException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
         catch (CPFVazioException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
     }
 

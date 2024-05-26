@@ -12,6 +12,17 @@ public class Main {
 
     private static Scanner teclado = new Scanner(System.in);
 
+    public static void mostrarErro(String mensagem)
+    {
+        System.out.println();
+        System.out.println("++++++++++++++++++++++");
+        System.out.println("ERRO:");
+        System.out.println(mensagem);
+        System.out.println("++++++++++++++++++++++");
+        System.out.println();
+    }
+
+
     public static void mostrarComandos()
     {
         System.out.println("Comandos disponíveis:");
@@ -28,9 +39,7 @@ public class Main {
         }
         catch (InputMismatchException e)
         {
-            System.out.println("+++++++++++++++++++++++");
-            System.out.println("ERRO: Digite um número!");
-            System.out.println("+++++++++++++++++++++++");
+            mostrarErro("Digite um número!");
             teclado.nextLine();
             return 0;
         }

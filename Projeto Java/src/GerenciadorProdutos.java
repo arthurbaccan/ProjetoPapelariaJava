@@ -114,41 +114,21 @@ public class GerenciadorProdutos {
         }
         catch (NomeVazioException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
         catch (PrecoInvalidoException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
         catch (DescricaoVaziaException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
         catch (InputMismatchException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println("Digite um número no campo!");
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro("Digite um número no campo!");
         }
     }
 

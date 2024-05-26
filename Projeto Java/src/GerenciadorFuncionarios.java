@@ -41,12 +41,7 @@ public abstract class GerenciadorFuncionarios {
                             a++;
                         }
                         catch (NumberFormatException e) {
-                            System.out.println();
-                            System.out.println("++++++++++++++++++++++");
-                            System.out.println("ERRO:");
-                            System.out.println("Salário deve ser um número!");
-                            System.out.println("++++++++++++++++++++++");
-                            System.out.println();
+                            Main.mostrarErro("Salário deve ser um número!");
                         }
                     }
                     Funcionario fNovo = new Funcionario(nome, idade, endereco, codigoDeRegistro, salario);
@@ -85,38 +80,18 @@ public abstract class GerenciadorFuncionarios {
             }
         } catch (IdadeInvalidaException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
         catch (NomeVazioException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
         catch (SalarioInvalidoException e)
         {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
         catch (EnderecoVazioException e) {
-            System.out.println();
-            System.out.println("++++++++++++++++++++++");
-            System.out.println("ERRO:");
-            System.out.println(e.getMessage());
-            System.out.println("++++++++++++++++++++++");
-            System.out.println();
+            Main.mostrarErro(e.getMessage());
         }
 
     }
