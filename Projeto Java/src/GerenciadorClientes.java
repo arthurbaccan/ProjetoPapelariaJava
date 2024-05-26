@@ -36,10 +36,13 @@ public abstract class GerenciadorClientes{
                     System.out.println("Digite o endereço");
                     teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
                     String endereco = teclado.nextLine();
+                    Cliente.checaEndereco(endereco);
                     System.out.println("Digite o CPF");
                     String cpf = teclado.nextLine();
+                    Cliente.checaCPF(cpf);
                     System.out.println("Digite o Telefone");
                     String telefone = teclado.nextLine();
+                    Cliente.checaTelefone(telefone);
 
                     Cliente clNovo = new Cliente(nome, idade, endereco, cpf, telefone);
                     GerenciadorClientes.adicionar(clNovo);
@@ -193,6 +196,56 @@ public abstract class GerenciadorClientes{
             System.out.println("++++++++++++++++++++++");
             System.out.println("ERRO:");
             System.out.println("Digite um número no campo!");
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+
+        catch (CPFInvalidoException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+
+        catch (TelefoneInvalidoException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+
+        catch (EnderecoVazioException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+
+        catch (TelefoneVazioException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+
+        catch (CPFVazioException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
             System.out.println("++++++++++++++++++++++");
             System.out.println();
         }
