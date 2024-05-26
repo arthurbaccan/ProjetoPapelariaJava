@@ -5,6 +5,8 @@ public class Cliente extends Pessoa{
 
     public Cliente(String nome, int idade, String endereco, String cpf, String telefone) {
         super(nome, idade);
+        if (endereco.isEmpty())
+            throw new  EnderecoVazioException();
         this.endereco = endereco;
         this.cpf = cpf;
         this.telefone = telefone;
