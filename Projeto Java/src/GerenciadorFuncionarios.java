@@ -26,8 +26,10 @@ public abstract class GerenciadorFuncionarios {
                     System.out.println("Digite o endereço");
                     teclado.nextLine();
                     String endereco = teclado.nextLine();
+                    Funcionario.verificaEndereco(endereco);
                     System.out.println("Digite o código de resgitro");
                     String codigoDeRegistro = teclado.nextLine();
+                    Funcionario.verificaCodigoDeRegistro(codigoDeRegistro);
 
                     double salario=0;
                     for(int a=0; a==0;) {

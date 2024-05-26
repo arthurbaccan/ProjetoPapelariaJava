@@ -7,6 +7,7 @@ public class Funcionario extends Pessoa implements IPessoa{
     public Funcionario(String nome, int idade, String endereco, String codigoDeRegistro, double salario) {
         super(nome, idade);
         setEndereco(endereco);
+        verificaCodigoDeRegistro(codigoDeRegistro);
         this.codigoDeRegistro = codigoDeRegistro;
         setSalario(salario);
     }
@@ -34,6 +35,12 @@ public class Funcionario extends Pessoa implements IPessoa{
     public static void verificaEndereco(String endereco) {
         if (endereco.isEmpty()) {
             throw new EnderecoVazioException();
+        }
+    }
+
+    public static void verificaCodigoDeRegistro(String codigoDeRegistro) {
+        if (codigoDeRegistro.isEmpty()) {
+            throw new CodigoDeRegistroVazioException();
         }
     }
 
