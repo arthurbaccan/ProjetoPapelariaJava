@@ -26,17 +26,9 @@ public abstract class GerenciadorClientes{
             {
                 case ADICIONAR_CLIENTE:
                 {
-                    teclado.nextLine();
-                    System.out.println("Digite o nome do Cliente");
-                    String nome = teclado.nextLine();
-                    Pessoa.verificaNome(nome);
-                    System.out.println("Digite a idade");
-                    int idade = teclado.nextInt();
-                    Pessoa.verificaIdade(idade);
-                    System.out.println("Digite o endereço");
-                    teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
-                    String endereco = teclado.nextLine();
-                    Cliente.checaEndereco(endereco);
+                    String nome = Main.nomeMain();
+                    Integer idade = Main.idadeMain();
+                    String endereco = Main.enderecoMain();
                     System.out.println("Digite o CPF");
                     String cpf = teclado.nextLine();
                     Cliente.checaCPF(cpf);

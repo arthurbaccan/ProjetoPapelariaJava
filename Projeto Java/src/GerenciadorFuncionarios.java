@@ -17,11 +17,9 @@ public abstract class GerenciadorFuncionarios {
             switch(comando) {
                 case ADICIONAR_FUNCIONARIO: {
 
-                    String nome = Main.teste();
-                    Integer idade = Main.teste2();
-                    String endereco = Main.teste3();
-
-                    teclado.nextLine();
+                    String nome = Main.nomeMain();
+                    Integer idade = Main.idadeMain();
+                    String endereco = Main.enderecoMain();
                     System.out.println("Digite o código de resgitro");
                     String codigoDeRegistro = teclado.nextLine();
                     Funcionario.verificaCodigoDeRegistro(codigoDeRegistro);
