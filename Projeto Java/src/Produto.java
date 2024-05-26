@@ -6,13 +6,41 @@ public class Produto {
     private static int maiorCodigo = 0;
 
     public Produto(String nome, String descricao, double preco, boolean importado) {
+        checaNome(nome);
         this.nome = nome;
+        checaDescricao(descricao);
         this.descricao = descricao;
+        checaPreco(preco);
         this.preco = preco;
         this.importado = importado;
         Produto.maiorCodigo++;
         this.codigoProduto = Produto.maiorCodigo;
     }
+
+    public static void checaDescricao(String descricao)
+    {
+        if (descricao.isEmpty())
+        {
+            throw new DescricaoVaziaException();
+        }
+    }
+
+    public static void checaNome(String nome)
+    {
+        if (nome.isEmpty())
+        {
+            throw new NomeVazioException();
+        }
+    }
+
+    public static void checaPreco(double preco)
+    {
+        if (preco < 0)
+        {
+            throw new PrecoInvalidoException();
+        }
+    }
+
 
     @Override
     public String toString() {

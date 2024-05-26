@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GerenciadorProdutos {
@@ -30,84 +31,127 @@ public class GerenciadorProdutos {
 
     public static void executarComando(int comando, Scanner teclado)
     {
-        switch (comando){
-            case ADICIONAR_PRODUTO:
-            {
-                teclado.nextLine();
-                System.out.println("Digite o nome do produto");
-                String nome = teclado.nextLine();
-                Pessoa.verificaNome(nome);
-                System.out.println("Digite a descrição");
-                //teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
-                String descricao = teclado.nextLine();
-                System.out.println("Digite o preço");
-                double preco = teclado.nextDouble();
-                teclado.nextLine();
-                System.out.println("É importado? [s/n]");
-                String importado = teclado.nextLine();
-                try {
-                    boolean importadoBool = importadoConvert(importado);
-                    Produto produtoNovo = new Produto(nome, descricao, preco, importadoBool);
-                    GerenciadorProdutos.adicionar(produtoNovo);
-                }
-                catch (ValorParaImportadoInvalido e)
-                {
-                    System.out.println();
-                    System.out.println("++++++++++++++++++++++");
-                    System.out.println("ERRO:");
-                    System.out.println(e.getMessage());
-                    System.out.println("++++++++++++++++++++++");
-                    System.out.println();
-                }
-            } break;
+        try {
 
-            case REMOVER_PRODUTO: {
-                teclado.nextLine();
-                System.out.println("Digite o código do produto a ser removido");
-                int codigo = teclado.nextInt();
-                Produto produtoARemover = null;
-                System.out.println("Removendo o produto:");
-                for (Produto produto : listaProdutos) {
-                    if (produto.codigoProduto == codigo) {
-                        produto.exibir();
-                        produtoARemover = produto;
-                        break;
+
+            switch (comando) {
+                case ADICIONAR_PRODUTO: {
+                    teclado.nextLine();
+                    System.out.println("Digite o nome do produto");
+                    String nome = teclado.nextLine();
+                    Produto.checaNome(nome);
+                    System.out.println("Digite a descrição");
+                    //teclado.nextLine(); // Limpar o buffer, n sei pq precisa disso, mas sem não funciona
+                    String descricao = teclado.nextLine();
+                    Produto.checaDescricao(descricao);
+                    System.out.println("Digite o preço");
+                    double preco = teclado.nextDouble();
+                    Produto.checaPreco(preco);
+                    teclado.nextLine();
+                    System.out.println("É importado? [s/n]");
+                    String importado = teclado.nextLine();
+                    try {
+                        boolean importadoBool = importadoConvert(importado);
+                        Produto produtoNovo = new Produto(nome, descricao, preco, importadoBool);
+                        GerenciadorProdutos.adicionar(produtoNovo);
+                    } catch (ValorParaImportadoInvalido e) {
+                        System.out.println();
+                        System.out.println("++++++++++++++++++++++");
+                        System.out.println("ERRO:");
+                        System.out.println(e.getMessage());
+                        System.out.println("++++++++++++++++++++++");
+                        System.out.println();
                     }
                 }
-                GerenciadorProdutos.remover(produtoARemover);
+                break;
+
+                case REMOVER_PRODUTO: {
+                    teclado.nextLine();
+                    System.out.println("Digite o código do produto a ser removido");
+                    int codigo = teclado.nextInt();
+                    Produto produtoARemover = null;
+                    System.out.println("Removendo o produto:");
+                    for (Produto produto : listaProdutos) {
+                        if (produto.codigoProduto == codigo) {
+                            produto.exibir();
+                            produtoARemover = produto;
+                            break;
+                        }
+                    }
+                    GerenciadorProdutos.remover(produtoARemover);
+                }
+
+                case MOSTRAR_TODOS: {
+                    GerenciadorProdutos.mostrarTodos();
+                }
+                break;
+
+                case PESQUISAR_PRODUTO_NOME: {
+                    teclado.nextLine();
+                    System.out.println("Digite as letras iniciais do nome do produto");
+                    String nome = teclado.nextLine();
+                    GerenciadorProdutos.pesquisarPorNome(nome);
+                }
+                break;
+
+                case PESQUISAR_PRODUTO_DESCRICAO: {
+                    teclado.nextLine();
+                    System.out.println("Digite o começo da descricão do produto");
+                    String descricao = teclado.nextLine();
+                    GerenciadorProdutos.pesquisarPorDescricao(descricao);
+                }
+                break;
+
+                case PESQUISAR_PRODUTO_PRECO: {
+
+                    System.out.println("Digite o preço do produto");
+                    double preco = teclado.nextDouble();
+                    GerenciadorProdutos.pesquisarPorPreco(preco);
+                }
+                break;
+
             }
+        }
+        catch (NomeVazioException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
 
-            case MOSTRAR_TODOS:
-            {
-                GerenciadorProdutos.mostrarTodos();
-            } break;
+        catch (PrecoInvalidoException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
 
-            case PESQUISAR_PRODUTO_NOME:
-            {
-                teclado.nextLine();
-                System.out.println("Digite as letras iniciais do nome do produto");
-                String nome = teclado.nextLine();
-                GerenciadorProdutos.pesquisarPorNome(nome);
-            } break;
-
-            case PESQUISAR_PRODUTO_DESCRICAO:
-            {
-                teclado.nextLine();
-                System.out.println("Digite o começo da descricão do produto");
-                String descricao = teclado.nextLine();
-                GerenciadorProdutos.pesquisarPorDescricao(descricao);
-            } break;
-
-            case PESQUISAR_PRODUTO_PRECO:
-            {
-
-                System.out.println("Digite o preço do produto");
-                double preco = teclado.nextDouble();
-                GerenciadorProdutos.pesquisarPorPreco(preco);
-            } break;
-
+        catch (DescricaoVaziaException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println("Digite um número no campo!");
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
         }
     }
+
 
     public static void pesquisarPorDescricao(String descricaoProduto)
     {
