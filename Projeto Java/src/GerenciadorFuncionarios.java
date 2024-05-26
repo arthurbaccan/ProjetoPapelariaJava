@@ -16,17 +16,12 @@ public abstract class GerenciadorFuncionarios {
         try{
             switch(comando) {
                 case ADICIONAR_FUNCIONARIO: {
+
+                    String nome = Main.teste();
+                    Integer idade = Main.teste2();
+                    String endereco = Main.teste3();
+
                     teclado.nextLine();
-                    System.out.println("Digite o nome do Funcionário");
-                    String nome = teclado.nextLine();
-                    Pessoa.verificaNome(nome);
-                    System.out.println("Digite a idade");
-                    int idade = teclado.nextInt();
-                    Pessoa.verificaIdade(idade);
-                    System.out.println("Digite o endereço");
-                    teclado.nextLine();
-                    String endereco = teclado.nextLine();
-                    Funcionario.verificaEndereco(endereco);
                     System.out.println("Digite o código de resgitro");
                     String codigoDeRegistro = teclado.nextLine();
                     Funcionario.verificaCodigoDeRegistro(codigoDeRegistro);

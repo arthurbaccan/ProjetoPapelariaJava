@@ -22,6 +22,29 @@ public class Main {
         System.out.println();
     }
 
+    public static String teste() {
+        teclado.nextLine();
+        System.out.println("Digite o nome do Funcionário");
+        String nomeMain = teclado.nextLine();
+        Pessoa.verificaNome(nomeMain);
+        return nomeMain;
+    }
+
+    public static int teste2() {
+        teclado.nextLine();
+        System.out.println("Digite a idade");
+        int idadeMain = teclado.nextInt();
+        Pessoa.verificaIdade(idadeMain);
+        return idadeMain;
+    }
+
+    public static String teste3() {
+        teclado.nextLine();
+        System.out.println("Digite o endereço");
+        String enderecoMain = teclado.nextLine();
+        Funcionario.verificaEndereco(enderecoMain);
+        return enderecoMain;
+    }
 
     public static void mostrarComandos()
     {
