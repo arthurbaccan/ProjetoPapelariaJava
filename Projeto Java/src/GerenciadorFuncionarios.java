@@ -108,6 +108,14 @@ public abstract class GerenciadorFuncionarios {
             System.out.println("++++++++++++++++++++++");
             System.out.println();
         }
+        catch (EnderecoVazioException e) {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
 
     }
 

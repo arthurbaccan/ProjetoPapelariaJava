@@ -6,7 +6,7 @@ public class Funcionario extends Pessoa implements IPessoa{
 
     public Funcionario(String nome, int idade, String endereco, String codigoDeRegistro, double salario) {
         super(nome, idade);
-        this.endereco = endereco;
+        setEndereco(endereco);
         this.codigoDeRegistro = codigoDeRegistro;
         setSalario(salario);
     }
@@ -20,10 +20,20 @@ public class Funcionario extends Pessoa implements IPessoa{
         return salario;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
     public static void verificaSalario(double salario) {
         if (salario<=0)
         {
             throw new SalarioInvalidoException();
+        }
+    }
+
+    public static void verificaEndereco(String endereco) {
+        if (endereco.isEmpty()) {
+            throw new EnderecoVazioException();
         }
     }
 
@@ -33,4 +43,9 @@ public class Funcionario extends Pessoa implements IPessoa{
         this.salario = salario;
     }
 
+    public void setEndereco(String endereco) {
+        verificaEndereco(endereco);
+
+        this.endereco = endereco;
+    }
 }
