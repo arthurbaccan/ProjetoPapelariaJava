@@ -61,7 +61,7 @@ public class Main {
                         comando = lerComando();
                         GerenciadorFuncionarios.executarComando(comando, teclado);
                     }
-                }
+                } break;
 
                 case GERENCIAR_PRODUTO:
                 {
@@ -73,7 +73,7 @@ public class Main {
                         comando = lerComando();
                         GerenciadorProdutos.executarComando(comando, teclado);
                     }
-                }
+                } break;
 
 
                 /*case GERENCIAR_FUNCIONARIO:

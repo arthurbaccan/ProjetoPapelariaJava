@@ -1,5 +1,6 @@
 public class SalarioInvalidoException extends RuntimeException{
-    public String salarioInvalido() {
+    @Override
+    public String getMessage() {
         return "Salário inválido!";
     }
 }

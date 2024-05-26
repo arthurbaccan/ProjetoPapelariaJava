@@ -15,8 +15,7 @@ public abstract class GerenciadorFuncionarios {
     {
         try{
             switch(comando) {
-                case ADICIONAR_FUNCIONARIO:
-                {
+                case ADICIONAR_FUNCIONARIO: {
                     teclado.nextLine();
                     System.out.println("Digite o nome do Funcionário");
                     String nome = teclado.nextLine();
@@ -29,9 +28,25 @@ public abstract class GerenciadorFuncionarios {
                     String endereco = teclado.nextLine();
                     System.out.println("Digite o código de resgitro");
                     String codigoDeRegistro = teclado.nextLine();
-                    System.out.println("Digite o salário");
-                    String salario = teclado.nextLine();
 
+                    double salario=0;
+                    for(int a=0; a==0;) {
+                        System.out.println("Digite o salário");
+                        String salarioString = teclado.nextLine();
+
+                        try {
+                            salario = Double.valueOf(salarioString);
+                            a++;
+                        }
+                        catch (NumberFormatException e) {
+                            System.out.println();
+                            System.out.println("++++++++++++++++++++++");
+                            System.out.println("ERRO:");
+                            System.out.println("Salário deve ser um número!");
+                            System.out.println("++++++++++++++++++++++");
+                            System.out.println();
+                        }
+                    }
                     Funcionario fNovo = new Funcionario(nome, idade, endereco, codigoDeRegistro, salario);
                     GerenciadorFuncionarios.adicionar(fNovo);
                 }break;
@@ -77,6 +92,23 @@ public abstract class GerenciadorFuncionarios {
         }
         catch (NomeVazioException e)
         {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+        catch (SalarioInvalidoException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+        catch (EnderecoVazioException e) {
             System.out.println();
             System.out.println("++++++++++++++++++++++");
             System.out.println("ERRO:");
