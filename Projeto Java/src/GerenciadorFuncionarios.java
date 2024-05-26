@@ -30,7 +30,8 @@ public abstract class GerenciadorFuncionarios {
                     System.out.println("Digite o código de resgitro");
                     String codigoDeRegistro = teclado.nextLine();
                     System.out.println("Digite o salário");
-                    String salario = teclado.nextLine();
+                    String salarioString = teclado.nextLine();
+                    double salario = Double.valueOf(salarioString);
 
                     Funcionario fNovo = new Funcionario(nome, idade, endereco, codigoDeRegistro, salario);
                     GerenciadorFuncionarios.adicionar(fNovo);
@@ -76,6 +77,15 @@ public abstract class GerenciadorFuncionarios {
             System.out.println();
         }
         catch (NomeVazioException e)
+        {
+            System.out.println();
+            System.out.println("++++++++++++++++++++++");
+            System.out.println("ERRO:");
+            System.out.println(e.getMessage());
+            System.out.println("++++++++++++++++++++++");
+            System.out.println();
+        }
+        catch (SalarioInvalidoException e)
         {
             System.out.println();
             System.out.println("++++++++++++++++++++++");
