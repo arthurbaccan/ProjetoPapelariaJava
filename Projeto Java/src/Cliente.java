@@ -35,7 +35,7 @@ public class Cliente extends Pessoa{
         if (telefone.isEmpty())
         {
             throw new TelefoneVazioException();
-        } else if (telefone.length() != 8) {
+        } else if (telefone.length() < 8) {
             throw new TelefoneInvalidoException();
         }
     }
