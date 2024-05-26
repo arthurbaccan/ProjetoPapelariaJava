@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -22,7 +23,18 @@ public class Main {
 
     public static int lerComando()
     {
-        return teclado.nextInt();
+        try {
+            return teclado.nextInt();
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("+++++++++++++++++++++++");
+            System.out.println("ERRO: Digite um número!");
+            System.out.println("+++++++++++++++++++++++");
+            teclado.nextLine();
+            return 0;
+        }
+
     }
 
 
