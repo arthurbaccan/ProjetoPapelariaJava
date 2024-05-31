@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -818,11 +819,12 @@ public class Tela extends JFrame implements ActionListener{
         tabbedPane.addTab("Produto", produtoPanel);
 
 
-        //metodos pros botoes
+        //metodos pros botoes e placeholders
         adicionarCli.addActionListener(this::setAdicionarCli);
         removerCli.addActionListener(this::setRemoverCli);
         cancelarCli.addActionListener(this::setCancelarCli);
         salvarCli.addActionListener(this::setSalvarCli);
+        pesquisarCli.addActionListener(this::setPesquisarCli);
 
 
         adicionarFun.addActionListener(this::setAdicionarFun);
@@ -907,18 +909,18 @@ public class Tela extends JFrame implements ActionListener{
         GerenciadorClientes.adicionar(clNovo);
 
         modeloCli.addRow(new Object[]{
-                nomeInseridoCli,
-                idadeInseridaCliString,
-                enderecoInseridoCli,
-                cpfInseridoCli,
-                telefoneInseridoCli}
+                clNovo.nome, clNovo.idade, clNovo.endereco,clNovo.cpf, clNovo.telefone}
         );
     }
 
     public void setPesquisarCli(ActionEvent e) {
-        for (Cliente cliente : arrayListaCli) {
-            if (cliente.nome.startsWith(pesquisarCli.getText())) {
 
+        if(pesquisarCli.getText().isEmpty()) {
+            modeloCli.setRowCount(0);
+            for(Cliente cliente : arrayListaCli){
+                modeloCli.addRow(new Object[]{
+                        cliente}
+                );
             }
         }
     }

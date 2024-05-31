@@ -1,7 +1,7 @@
 public class Cliente extends Pessoa{
-    private String endereco;
+    protected String endereco;
     protected String cpf;
-    private String telefone;
+    protected String telefone;
 
     public Cliente(String nome, int idade, String endereco, String cpf, String telefone) {
         super(nome, idade);
