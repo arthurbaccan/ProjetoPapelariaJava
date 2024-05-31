@@ -3,6 +3,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Tela extends JFrame implements ActionListener{
 
@@ -16,9 +17,11 @@ public class Tela extends JFrame implements ActionListener{
     JButton abaixo18;
     JButton mediaIdade;
 
+    //lista clientes
     JPanel menuCli;
     JTable listaCli;
     JScrollPane scrollListaCli;
+    private static ArrayList<Cliente> arrayListaCli = new ArrayList<>();
 
     //campos do menu cliente
     JTextField addNomeCli;
@@ -97,9 +100,9 @@ public class Tela extends JFrame implements ActionListener{
 
     //Paineis
     JFrame jFrame;
-    JPanel cliente;
-    JPanel funcionario;
-    JPanel produto;
+    JPanel clientePanel;
+    JPanel funcionarioPanel;
+    JPanel produtoPanel;
 
 
     public Tela() {
@@ -112,8 +115,8 @@ public class Tela extends JFrame implements ActionListener{
         JTabbedPane tabbedPane = new JTabbedPane();
 
         //painel Cliente
-        cliente = new JPanel();
-        cliente.setLayout(new GridBagLayout());
+        clientePanel = new JPanel();
+        clientePanel.setLayout(new GridBagLayout());
         GridBagConstraints gbcCli = new GridBagConstraints();
 
         pesquisarCli = new PlaceholderTextField("Pesquisar nome");
@@ -126,7 +129,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.fill = GridBagConstraints.BOTH;
         gbcCli.anchor = GridBagConstraints.NORTHWEST;
         gbcCli.insets = new Insets(10, 7, 10, 0);
-        cliente.add(pesquisarCli, gbcCli);
+        clientePanel.add(pesquisarCli, gbcCli);
 
         adicionarCli = new JButton(" Adicionar ");
         gbcCli.gridx = 1;
@@ -136,7 +139,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(10, 7, 10, 0);
-        cliente.add(adicionarCli, gbcCli);
+        clientePanel.add(adicionarCli, gbcCli);
 
         removerCli = new JButton("Remover");
         gbcCli.gridx = 2;
@@ -146,7 +149,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(10, 7, 10, 0);
-        cliente.add(removerCli, gbcCli);
+        clientePanel.add(removerCli, gbcCli);
 
         maisNovo = new JButton(" Mais Novo ");
         gbcCli.gridx = 0;
@@ -156,7 +159,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(0, 7, 0, 0);
-        cliente.add(maisNovo, gbcCli);
+        clientePanel.add(maisNovo, gbcCli);
 
         maisVelho = new JButton("Mais Velho");
         gbcCli.gridx = 1;
@@ -166,7 +169,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(0, 7, 0, 0);
-        cliente.add(maisVelho, gbcCli);
+        clientePanel.add(maisVelho, gbcCli);
 
         acima60 = new JButton("Maiores de 60");
         gbcCli.gridx = 2;
@@ -176,7 +179,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(0, 7, 0, 0);
-        cliente.add(acima60, gbcCli);
+        clientePanel.add(acima60, gbcCli);
 
         abaixo18 = new JButton("Menores de 18");
         gbcCli.gridx = 3;
@@ -186,7 +189,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(0, 7, 0, 0);
-        cliente.add(abaixo18, gbcCli);
+        clientePanel.add(abaixo18, gbcCli);
 
         mediaIdade = new JButton("Média Idade");
         gbcCli.gridx = 4;
@@ -196,16 +199,21 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weightx = 0;
         gbcCli.fill = GridBagConstraints.NONE;
         gbcCli.insets = new Insets(0, 7, 0, 0);
-        cliente.add(mediaIdade, gbcCli);
+        clientePanel.add(mediaIdade, gbcCli);
 
         // Dados da tabela
         modeloCli = new DefaultTableModel(
                 new Object[]{"Nome", "Idade", "Endereço", "CPF", "Telefone"}, 0
         );
 
-        modeloCli.addRow(new Object[]{"nome","idade","endereço", "cpf", "telefone"});
+        modeloCli.addRow(new Object[]{"dome","idade","endereço", "cpf", "telefone"});
+        modeloCli.addRow(new Object[]{"come","idade","endereço", "cpf", "telefone"});
+        modeloCli.addRow(new Object[]{"bome","idade","endereço", "cpf", "telefone"});
+        modeloCli.addRow(new Object[]{"aome","idade","endereço", "cpf", "telefone"});
 
         listaCli = new JTable(modeloCli);
+
+
 
         scrollListaCli = new JScrollPane(listaCli);
 
@@ -217,7 +225,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weighty = 1;
         gbcCli.fill = GridBagConstraints.BOTH;
         gbcCli.insets = new Insets(10, 7, 0, 0);
-        cliente.add(scrollListaCli, gbcCli);
+        clientePanel.add(scrollListaCli, gbcCli);
 
         //Adiciona tabela na parte direita
         menuCli = new JPanel();
@@ -231,7 +239,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.weighty = 1;
         gbcCli.fill = GridBagConstraints.BOTH;
         gbcCli.insets = new Insets(10, 10, 0, 0);
-        cliente.add(menuCli, gbcCli);
+        clientePanel.add(menuCli, gbcCli);
 
         //campos do menu
         nomeCli = new JLabel("Insira nome: ");
@@ -374,8 +382,8 @@ public class Tela extends JFrame implements ActionListener{
 
 
         //painel funcionario
-        funcionario = new JPanel();
-        funcionario.setLayout(new GridBagLayout());
+        funcionarioPanel = new JPanel();
+        funcionarioPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbcFun = new GridBagConstraints();
 
         pesquisarFun = new PlaceholderTextField("Pesquisar nome");
@@ -388,7 +396,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcFun.fill = GridBagConstraints.BOTH;
         gbcFun.anchor = GridBagConstraints.NORTHWEST;
         gbcFun.insets = new Insets(10, 7, 0, 0);
-        funcionario.add(pesquisarFun, gbcFun);
+        funcionarioPanel.add(pesquisarFun, gbcFun);
 
         adicionarFun = new JButton("Adicionar");
         gbcFun.gridx = 1;
@@ -399,7 +407,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcFun.weighty = 0;
         gbcFun.fill = GridBagConstraints.NONE;
         gbcFun.insets = new Insets(10, 7, 0, 0);
-        funcionario.add(adicionarFun, gbcFun);
+        funcionarioPanel.add(adicionarFun, gbcFun);
 
         removerFun = new JButton("Remover");
         gbcFun.gridx = 2;
@@ -410,7 +418,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcFun.weighty = 0;
         gbcFun.fill = GridBagConstraints.NONE;
         gbcFun.insets = new Insets(10, 7, 0, 190);
-        funcionario.add(removerFun, gbcFun);
+        funcionarioPanel.add(removerFun, gbcFun);
 
         // Dados da tabela
         modeloFun = new DefaultTableModel(
@@ -432,7 +440,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcFun.weighty = 1;
         gbcFun.fill = GridBagConstraints.BOTH;
         gbcFun.insets = new Insets(10, 7, 0, 0);
-        funcionario.add(scrollListaFun, gbcFun);
+        funcionarioPanel.add(scrollListaFun, gbcFun);
 
         //tabela da direita
         menuFun = new JPanel();
@@ -446,7 +454,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcFun.weighty = 1;
         gbcFun.fill = GridBagConstraints.BOTH;
         gbcFun.insets = new Insets(10, 10, 0, 0);
-        funcionario.add(menuFun, gbcFun);
+        funcionarioPanel.add(menuFun, gbcFun);
 
         //campos do menu funcionario
         nomeFun = new JLabel("Insira nome: ");
@@ -589,8 +597,8 @@ public class Tela extends JFrame implements ActionListener{
 
 
         //painel produto
-        produto = new JPanel();
-        produto.setLayout(new GridBagLayout());
+        produtoPanel = new JPanel();
+        produtoPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbcPro = new GridBagConstraints();
 
         pesquisarNomePro = new PlaceholderTextField("Pesquisar nome");
@@ -603,7 +611,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.anchor = GridBagConstraints.NORTHWEST;
         gbcPro.insets = new Insets(10, 7, 0, 0);
-        produto.add(pesquisarNomePro, gbcPro);
+        produtoPanel.add(pesquisarNomePro, gbcPro);
 
         pesquisarDescriPro = new PlaceholderTextField("Pesquisar descrição");
         gbcPro.gridx = 1;
@@ -614,7 +622,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.insets = new Insets(10, 7, 0, 0);
-        produto.add(pesquisarDescriPro, gbcPro);
+        produtoPanel.add(pesquisarDescriPro, gbcPro);
 
         pesquisarPrecoPro = new PlaceholderTextField("Pesquisar preço");
         gbcPro.gridx = 2;
@@ -625,7 +633,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.insets = new Insets(10, 7, 0, 0);
-        produto.add(pesquisarPrecoPro, gbcPro);
+        produtoPanel.add(pesquisarPrecoPro, gbcPro);
 
         adicionarPro = new JButton("Adicionar");
         gbcPro.gridx = 3;
@@ -636,7 +644,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.NONE;
         gbcPro.insets = new Insets(10, 7, 0, 0);
-        produto.add(adicionarPro, gbcPro);
+        produtoPanel.add(adicionarPro, gbcPro);
 
         removerPro = new JButton("Remover");
         gbcPro.gridx = 4;
@@ -647,7 +655,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.NONE;
         gbcPro.insets = new Insets(10, 7, 0, 4);
-        produto.add(removerPro, gbcPro);
+        produtoPanel.add(removerPro, gbcPro);
 
         // Dados da tabela
         modeloPro = new DefaultTableModel(
@@ -669,7 +677,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.weighty = 1;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.insets = new Insets(10, 7, 0, 0);
-        produto.add(scrollListaPro, gbcPro);
+        produtoPanel.add(scrollListaPro, gbcPro);
 
         //tabela da direita
         menuPro = new JPanel();
@@ -683,7 +691,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.weighty = 1;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.insets = new Insets(10, 10, 0, 0);
-        produto.add(menuPro, gbcPro);
+        produtoPanel.add(menuPro, gbcPro);
 
         //campos do menu produto
         nomePro = new JLabel("      Insira nome:");
@@ -805,15 +813,17 @@ public class Tela extends JFrame implements ActionListener{
         menuFun.setVisible(false);
         menuPro.setVisible(false);
 
-        tabbedPane.addTab("Cliente", cliente);
-        tabbedPane.addTab("Funcionario", funcionario);
-        tabbedPane.addTab("Produto", produto);
+        tabbedPane.addTab("Cliente", clientePanel);
+        tabbedPane.addTab("Funcionario", funcionarioPanel);
+        tabbedPane.addTab("Produto", produtoPanel);
 
 
-        //metodos pros botoes (ainda nao usam o projeto)
+        //metodos pros botoes
         adicionarCli.addActionListener(this::setAdicionarCli);
         removerCli.addActionListener(this::setRemoverCli);
         cancelarCli.addActionListener(this::setCancelarCli);
+        salvarCli.addActionListener(this::setSalvarCli);
+
 
         adicionarFun.addActionListener(this::setAdicionarFun);
         removerFun.addActionListener(this::setRemoverFun);
@@ -837,6 +847,11 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setCancelarCli(ActionEvent e) {
+        addNomeCli.setText("");
+        addIdadeCli.setText("");
+        addEnderecoCli.setText("");
+        addCpfCli.setText("");
+        addTelefoneCli.setText("");
         menuCli.setVisible(false);
     }
 
@@ -879,6 +894,36 @@ public class Tela extends JFrame implements ActionListener{
             modeloPro.removeRow(selectRowPro);
         }
     }
+
+    public void setSalvarCli(ActionEvent e) {
+        String nomeInseridoCli = addNomeCli.getText();
+        String idadeInseridaCliString = addIdadeCli.getText();
+        Integer idadeInseridaCli = Integer.parseInt(idadeInseridaCliString);
+        String enderecoInseridoCli = addEnderecoCli.getText();
+        String cpfInseridoCli = addCpfCli.getText();
+        String telefoneInseridoCli = addTelefoneCli.getText();
+
+        Cliente clNovo = new Cliente(nomeInseridoCli, idadeInseridaCli, enderecoInseridoCli, cpfInseridoCli, telefoneInseridoCli);
+        GerenciadorClientes.adicionar(clNovo);
+
+        modeloCli.addRow(new Object[]{
+                nomeInseridoCli,
+                idadeInseridaCliString,
+                enderecoInseridoCli,
+                cpfInseridoCli,
+                telefoneInseridoCli}
+        );
+    }
+
+    public void setPesquisarCli(ActionEvent e) {
+        for (Cliente cliente : arrayListaCli) {
+            if (cliente.nome.startsWith(pesquisarCli.getText())) {
+
+            }
+        }
+    }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
