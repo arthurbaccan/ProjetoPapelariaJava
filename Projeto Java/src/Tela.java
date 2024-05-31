@@ -870,6 +870,7 @@ public class Tela extends JFrame implements ActionListener{
         int selectRowCli = listaCli.getSelectedRow();
 
         if(selectRowCli != -1) {
+            arrayListaCli.remove(selectRowCli);
             modeloCli.removeRow(selectRowCli);
         }
     }
@@ -923,14 +924,15 @@ public class Tela extends JFrame implements ActionListener{
         else {
             modeloCli.setRowCount(0);
             for(Cliente cliente : arrayListaCli){
-                if (cliente.nome.startsWith(pesquisarCli.getText()))
-                modeloCli.addRow(new Object[]{
-                        cliente.nome,
-                        cliente.idade,
-                        cliente.endereco,
-                        cliente.cpf,
-                        cliente.telefone}
-                );
+                if (cliente.nome.startsWith(pesquisarCli.getText())) {
+                    modeloCli.addRow(new Object[]{
+                            cliente.nome,
+                            cliente.idade,
+                            cliente.endereco,
+                            cliente.cpf,
+                            cliente.telefone}
+                    );
+                    }
             }
         }
     }
