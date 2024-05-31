@@ -207,14 +207,7 @@ public class Tela extends JFrame implements ActionListener{
                 new Object[]{"Nome", "Idade", "Endereço", "CPF", "Telefone"}, 0
         );
 
-        modeloCli.addRow(new Object[]{"dome","idade","endereço", "cpf", "telefone"});
-        modeloCli.addRow(new Object[]{"come","idade","endereço", "cpf", "telefone"});
-        modeloCli.addRow(new Object[]{"bome","idade","endereço", "cpf", "telefone"});
-        modeloCli.addRow(new Object[]{"aome","idade","endereço", "cpf", "telefone"});
-
         listaCli = new JTable(modeloCli);
-
-
 
         scrollListaCli = new JScrollPane(listaCli);
 
@@ -906,7 +899,7 @@ public class Tela extends JFrame implements ActionListener{
         String telefoneInseridoCli = addTelefoneCli.getText();
 
         Cliente clNovo = new Cliente(nomeInseridoCli, idadeInseridaCli, enderecoInseridoCli, cpfInseridoCli, telefoneInseridoCli);
-        GerenciadorClientes.adicionar(clNovo);
+        arrayListaCli.add(clNovo);
 
         modeloCli.addRow(new Object[]{
                 clNovo.nome, clNovo.idade, clNovo.endereco,clNovo.cpf, clNovo.telefone}
@@ -919,7 +912,24 @@ public class Tela extends JFrame implements ActionListener{
             modeloCli.setRowCount(0);
             for(Cliente cliente : arrayListaCli){
                 modeloCli.addRow(new Object[]{
-                        cliente}
+                        cliente.nome,
+                        cliente.idade,
+                        cliente.endereco,
+                        cliente.cpf,
+                        cliente.telefone}
+                );
+            }
+        }
+        else {
+            modeloCli.setRowCount(0);
+            for(Cliente cliente : arrayListaCli){
+                if (cliente.nome.startsWith(pesquisarCli.getText()))
+                modeloCli.addRow(new Object[]{
+                        cliente.nome,
+                        cliente.idade,
+                        cliente.endereco,
+                        cliente.cpf,
+                        cliente.telefone}
                 );
             }
         }
