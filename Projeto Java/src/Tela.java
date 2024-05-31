@@ -36,6 +36,9 @@ public class Tela extends JFrame implements ActionListener{
     JButton salvarCli;
     JButton cancelarCli;
 
+    //metodos cliente
+    DefaultTableModel modeloCli;
+
     //campos do funcionario
     PlaceholderTextField pesquisarFun;
     JButton adicionarFun;
@@ -61,6 +64,9 @@ public class Tela extends JFrame implements ActionListener{
     JButton salvarFun;
     JButton cancelarFun;
 
+    //metodos funcionario
+    DefaultTableModel modeloFun;
+
     //campos do produto
     PlaceholderTextField pesquisarNomePro;
     PlaceholderTextField pesquisarDescriPro;
@@ -85,6 +91,9 @@ public class Tela extends JFrame implements ActionListener{
 
     JButton salvarPro;
     JButton cancelarPro;
+
+    //metodos produto
+    DefaultTableModel modeloPro;
 
     //Paineis
     JFrame jFrame;
@@ -189,19 +198,12 @@ public class Tela extends JFrame implements ActionListener{
         gbcCli.insets = new Insets(0, 7, 0, 0);
         cliente.add(mediaIdade, gbcCli);
 
-        /* Dados da tabela
-        String[][] data = {
-                {"tester", "-1", "rua", "0", "-1"}
-        };
-
-        // Cabeçalhos das colunas
-        String[] columnNames = {"Nome", "Idade", "Endereço", "CPF", "Telefone"};*/
-
-        DefaultTableModel modeloCli = new DefaultTableModel(
+        // Dados da tabela
+        modeloCli = new DefaultTableModel(
                 new Object[]{"Nome", "Idade", "Endereço", "CPF", "Telefone"}, 0
         );
 
-
+        modeloCli.addRow(new Object[]{"nome","idade","endereço", "cpf", "telefone"});
 
         listaCli = new JTable(modeloCli);
 
@@ -411,14 +413,13 @@ public class Tela extends JFrame implements ActionListener{
         funcionario.add(removerFun, gbcFun);
 
         // Dados da tabela
-        String[][] data2 = {
-                {"tester", "-1", "rua", "0", "-1"}
-        };
+        modeloFun = new DefaultTableModel(
+                new Object[]{"Nome", "Idade", "Endereço", "Código", "Salário"}, 0
+        );
 
-        // Cabeçalhos das colunas
-        String[] columnNames2 = {"Nome", "Idade", "Endereço", "CPF", "Telefone"};
+        modeloFun.addRow(new Object[]{"nome","idade","endereço", "código", "salário"});
 
-        listaFun = new JTable(data2, columnNames2);
+        listaFun = new JTable(modeloFun);
 
         scrollListaFun = new JScrollPane(listaFun);
 
@@ -649,14 +650,13 @@ public class Tela extends JFrame implements ActionListener{
         produto.add(removerPro, gbcPro);
 
         // Dados da tabela
-        String[][] data3 = {
-                {"tester", "-1", "rua", "0", "-1"}
-        };
+        modeloPro = new DefaultTableModel(
+                new Object[]{"Nome", "Descrição", "Preço", "Importado", "Código"}, 0
+        );
 
-        // Cabeçalhos das colunas
-        String[] columnNames3 = {"Nome", "Idade", "Endereço", "CPF", "Telefone"};
+        modeloPro.addRow(new Object[]{"nome","descrição","preço", "importado", "código"});
 
-        listaPro = new JTable(data3, columnNames3);
+        listaPro = new JTable(modeloPro);
 
         scrollListaPro = new JScrollPane(listaPro);
 
@@ -816,9 +816,11 @@ public class Tela extends JFrame implements ActionListener{
         cancelarCli.addActionListener(this::setCancelarCli);
 
         adicionarFun.addActionListener(this::setAdicionarFun);
+        removerFun.addActionListener(this::setRemoverFun);
         cancelarFun.addActionListener(this::setCancelarFun);
 
         adicionarPro.addActionListener(this::setAdicionarPro);
+        removerPro.addActionListener(this::setRemoverPro);
         cancelarPro.addActionListener(this::setCancelarPro);
 
 
@@ -855,10 +857,26 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setRemoverCli(ActionEvent e) {
-        int selectRow = listaCli.getSelectedRow();
+        int selectRowCli = listaCli.getSelectedRow();
 
-        if(selectRow != -1) {
+        if(selectRowCli != -1) {
+            modeloCli.removeRow(selectRowCli);
+        }
+    }
 
+    public void setRemoverFun(ActionEvent e) {
+        int selectRowFun = listaFun.getSelectedRow();
+
+        if(selectRowFun != -1) {
+            modeloFun.removeRow(selectRowFun);
+        }
+    }
+
+    public void setRemoverPro(ActionEvent e) {
+        int selectRowPro = listaPro.getSelectedRow();
+
+        if(selectRowPro != -1) {
+            modeloPro.removeRow(selectRowPro);
         }
     }
 
