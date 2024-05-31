@@ -1,7 +1,10 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Tela extends JFrame {
+public class Tela extends JFrame implements ActionListener{
 
     //campos do cliente
     PlaceholderTextField pesquisarCli;
@@ -186,15 +189,21 @@ public class Tela extends JFrame {
         gbcCli.insets = new Insets(0, 7, 0, 0);
         cliente.add(mediaIdade, gbcCli);
 
-        // Dados da tabela
+        /* Dados da tabela
         String[][] data = {
                 {"tester", "-1", "rua", "0", "-1"}
         };
 
         // Cabeçalhos das colunas
-        String[] columnNames = {"Nome", "Idade", "Endereço", "CPF", "Telefone"};
+        String[] columnNames = {"Nome", "Idade", "Endereço", "CPF", "Telefone"};*/
 
-        listaCli = new JTable(data, columnNames);
+        DefaultTableModel modeloCli = new DefaultTableModel(
+                new Object[]{"Nome", "Idade", "Endereço", "CPF", "Telefone"}, 0
+        );
+
+
+
+        listaCli = new JTable(modeloCli);
 
         scrollListaCli = new JScrollPane(listaCli);
 
@@ -792,13 +801,69 @@ public class Tela extends JFrame {
         gbcPro2.insets = new Insets(80, 0, 0, 0);
         menuPro.add(cancelarPro, gbcPro2);
 
+        menuCli.setVisible(false);
+        menuFun.setVisible(false);
+        menuPro.setVisible(false);
+
         tabbedPane.addTab("Cliente", cliente);
         tabbedPane.addTab("Funcionario", funcionario);
         tabbedPane.addTab("Produto", produto);
 
+
+        //metodos pros botoes (ainda nao usam o projeto)
+        adicionarCli.addActionListener(this::setAdicionarCli);
+        removerCli.addActionListener(this::setRemoverCli);
+        cancelarCli.addActionListener(this::setCancelarCli);
+
+        adicionarFun.addActionListener(this::setAdicionarFun);
+        cancelarFun.addActionListener(this::setCancelarFun);
+
+        adicionarPro.addActionListener(this::setAdicionarPro);
+        cancelarPro.addActionListener(this::setCancelarPro);
+
+
+
+
+        //tela recebe os paineis
         jFrame.add(tabbedPane, BorderLayout.CENTER);
 
         jFrame.setVisible(true);
+    }
+
+    public void setAdicionarCli(ActionEvent e) {
+        menuCli.setVisible(true);
+    }
+
+    public void setCancelarCli(ActionEvent e) {
+        menuCli.setVisible(false);
+    }
+
+    public void setAdicionarFun(ActionEvent e) {
+        menuFun.setVisible(true);
+    }
+
+    public void setCancelarFun(ActionEvent e) {
+        menuFun.setVisible(false);
+    }
+
+    public void setAdicionarPro(ActionEvent e) {
+        menuPro.setVisible(true);
+    }
+
+    public void setCancelarPro(ActionEvent e) {
+        menuPro.setVisible(false);
+    }
+
+    public void setRemoverCli(ActionEvent e) {
+        int selectRow = listaCli.getSelectedRow();
+
+        if(selectRow != -1) {
+
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
     }
 
     public static void main(String[] args) {
