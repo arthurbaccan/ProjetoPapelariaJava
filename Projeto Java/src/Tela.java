@@ -823,6 +823,7 @@ public class Tela extends JFrame implements ActionListener{
         maisVelho.addActionListener(this::setMaisVelho);
         acima60.addActionListener(this::setAcima60);
         abaixo18.addActionListener(this::setAbaixo18);
+        mediaIdade.addActionListener(this::setMediaIdade);
 
         adicionarFun.addActionListener(this::setAdicionarFun);
         removerFun.addActionListener(this::setRemoverFun);
@@ -1116,9 +1117,13 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setMediaIdade(ActionEvent e) {
-
+        double mediaIdade=0;
+        for(Cliente cliente : arrayListaCli) {
+            mediaIdade += cliente.idade;
+        }
+        mediaIdade = mediaIdade/(arrayListaCli.size());
+        JOptionPane.showMessageDialog(null, "Média de idade dos clientes: "+mediaIdade);
     }
-
 
     public void setPesquisarFun(ActionEvent e) {
 
