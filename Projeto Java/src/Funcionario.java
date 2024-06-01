@@ -1,8 +1,8 @@
 public class Funcionario extends Pessoa implements IPessoa{
 
-    private String endereco;
+    protected String endereco;
     protected String codigoDeRegistro;
-    private double salario;
+    protected double salario;
 
     public Funcionario(String nome, int idade, String endereco, String codigoDeRegistro, double salario) {
         super(nome, idade);

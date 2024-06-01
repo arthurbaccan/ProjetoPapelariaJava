@@ -2,10 +2,10 @@ public class Produto {
     protected int codigoProduto;
     protected String nome, descricao;
     protected double preco;
-    private boolean importado;
-    private static int maiorCodigo = 0;
+    protected boolean importado;
+    protected static int maiorCodigo = 0;
 
-    public Produto(String nome, String descricao, double preco, boolean importado) {
+    public Produto(String nome, String descricao, double preco, boolean importado, int codigoProduto) {
         checaNome(nome);
         this.nome = nome;
         checaDescricao(descricao);

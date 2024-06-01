@@ -50,9 +50,11 @@ public class GerenciadorProdutos {
                     teclado.nextLine();
                     System.out.println("É importado? [s/n]");
                     String importado = teclado.nextLine();
+                    int codigoProduto=0;
+
                     try {
                         boolean importadoBool = importadoConvert(importado);
-                        Produto produtoNovo = new Produto(nome, descricao, preco, importadoBool);
+                        Produto produtoNovo = new Produto(nome, descricao, preco, importadoBool, codigoProduto);
                         GerenciadorProdutos.adicionar(produtoNovo);
                     } catch (ValorParaImportadoInvalido e) {
                         System.out.println();

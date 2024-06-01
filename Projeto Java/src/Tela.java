@@ -48,9 +48,11 @@ public class Tela extends JFrame implements ActionListener{
     JButton adicionarFun;
     JButton removerFun;
 
+    //lista funcionario
     JPanel menuFun;
     JTable listaFun;
     JScrollPane scrollListaFun;
+    private static ArrayList<Funcionario> arrayListaFun = new ArrayList<>();
 
     //campos do menu funcionario
     JTextField addNomeFun;
@@ -78,20 +80,24 @@ public class Tela extends JFrame implements ActionListener{
     JButton adicionarPro;
     JButton removerPro;
 
+    //lista produto
     JPanel menuPro;
     JTable listaPro;
     JScrollPane scrollListaPro;
+    private static ArrayList<Produto> arrayListaPro = new ArrayList<>();
 
     //campos do menu produto
     JTextField addNomePro;
     JTextField addDescriPro;
     JTextField addPrecoPro;
     JTextField addImportPro;
+    JTextField addCodigoPro;
 
     JLabel nomePro;
     JLabel descriPro;
     JLabel precoPro;
     JLabel importPro;
+    JLabel codigoPro;
 
     JButton salvarPro;
     JButton cancelarPro;
@@ -781,7 +787,8 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro2.insets = new Insets(20, 0, 0, 20);
         menuPro.add(addImportPro, gbcPro2);
 
-        salvarPro = new JButton("Salvar");
+        codigoPro = new JLabel("Insira código:");
+        codigoPro.setFont(new Font("Arial", Font.BOLD, 12));
         gbcPro2.gridx = 0;
         gbcPro2.gridy = 4;
         gbcPro2.gridwidth = 1;
@@ -789,18 +796,40 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro2.weightx = 0;
         gbcPro2.weighty = 0;
         gbcPro2.fill = GridBagConstraints.NONE;
-        gbcPro2.insets = new Insets(80, 10, 0, 0);
-        menuPro.add(salvarPro, gbcPro2);
+        gbcPro2.insets = new Insets(20, 0, 0, 0);
+        menuPro.add(codigoPro, gbcPro2);
 
-        cancelarPro = new JButton("Cancelar");
+        addCodigoPro = new JTextField();
         gbcPro2.gridx = 1;
         gbcPro2.gridy = 4;
+        gbcPro2.gridwidth = 1;
+        gbcPro2.gridheight = 1;
+        gbcPro2.weightx = 1;
+        gbcPro2.weighty = 0;
+        gbcPro2.fill = GridBagConstraints.BOTH;
+        gbcPro2.insets = new Insets(20, 0, 0, 20);
+        menuPro.add(addCodigoPro, gbcPro2);
+
+        salvarPro = new JButton("Salvar");
+        gbcPro2.gridx = 0;
+        gbcPro2.gridy = 5;
         gbcPro2.gridwidth = 1;
         gbcPro2.gridheight = 1;
         gbcPro2.weightx = 0;
         gbcPro2.weighty = 0;
         gbcPro2.fill = GridBagConstraints.NONE;
-        gbcPro2.insets = new Insets(80, 0, 0, 0);
+        gbcPro2.insets = new Insets(40, 10, 0, 0);
+        menuPro.add(salvarPro, gbcPro2);
+
+        cancelarPro = new JButton("Cancelar");
+        gbcPro2.gridx = 1;
+        gbcPro2.gridy = 5;
+        gbcPro2.gridwidth = 1;
+        gbcPro2.gridheight = 1;
+        gbcPro2.weightx = 0;
+        gbcPro2.weighty = 0;
+        gbcPro2.fill = GridBagConstraints.NONE;
+        gbcPro2.insets = new Insets(40, 0, 0, 0);
         menuPro.add(cancelarPro, gbcPro2);
 
         menuCli.setVisible(false);
@@ -823,11 +852,12 @@ public class Tela extends JFrame implements ActionListener{
         adicionarFun.addActionListener(this::setAdicionarFun);
         removerFun.addActionListener(this::setRemoverFun);
         cancelarFun.addActionListener(this::setCancelarFun);
+        salvarFun.addActionListener(this::setSalvarFun);
 
         adicionarPro.addActionListener(this::setAdicionarPro);
         removerPro.addActionListener(this::setRemoverPro);
         cancelarPro.addActionListener(this::setCancelarPro);
-
+        salvarPro.addActionListener(this::setSalvarPro);
 
 
 
@@ -855,6 +885,11 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setCancelarFun(ActionEvent e) {
+        addNomeFun.setText("");
+        addIdadeFun.setText("");
+        addEnderecoFun.setText("");
+        addCodigoFun.setText("");
+        addSalario.setText("");
         menuFun.setVisible(false);
     }
 
@@ -863,6 +898,10 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setCancelarPro(ActionEvent e) {
+        addNomePro.setText("");
+        addDescriPro.setText("");
+        addPrecoPro.setText("");
+        addImportPro.setText("");
         menuPro.setVisible(false);
     }
 
@@ -887,8 +926,20 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setRemoverFun(ActionEvent e) {
         int selectedRowFun = listaFun.getSelectedRow();
+        String codigoSelected = (String) listaFun.getValueAt(listaFun.getSelectedRow(), 3);
+
 
         if(selectedRowFun != -1) {
+            Funcionario funcionarioParaRemover = null;
+            for (Funcionario funcionario : arrayListaFun) {
+
+                if(funcionario.codigoDeRegistro.startsWith(codigoSelected)) {
+                    funcionarioParaRemover = funcionario;
+                }
+            }
+            if (funcionarioParaRemover != null) {
+                arrayListaCli.remove(funcionarioParaRemover);
+            }
             modeloFun.removeRow(selectedRowFun);
         }
     }
@@ -909,11 +960,67 @@ public class Tela extends JFrame implements ActionListener{
         String cpfInseridoCli = addCpfCli.getText();
         String telefoneInseridoCli = addTelefoneCli.getText();
 
-        Cliente clNovo = new Cliente(nomeInseridoCli, idadeInseridaCli, enderecoInseridoCli, cpfInseridoCli, telefoneInseridoCli);
+        Cliente clNovo = new Cliente(
+                nomeInseridoCli,
+                idadeInseridaCli,
+                enderecoInseridoCli,
+                cpfInseridoCli,
+                telefoneInseridoCli);
         arrayListaCli.add(clNovo);
 
         modeloCli.addRow(new Object[]{
                 clNovo.nome, clNovo.idade, clNovo.endereco,clNovo.cpf, clNovo.telefone}
+        );
+    }
+
+    public void setSalvarFun(ActionEvent e) {
+        String nomeInseridoFun = addNomeFun.getText();
+        String idadeInseridaFunString = addIdadeFun.getText();
+        Integer idadeInseridaFun = Integer.parseInt(idadeInseridaFunString);
+        String enderecoInseridoFun = addEnderecoFun.getText();
+        String codigoInseridoFun = addCodigoFun.getText();
+        String salarioInseridoFunString = addSalario.getText();
+        double salarioInseridoFun = Double.parseDouble(salarioInseridoFunString);
+
+        Funcionario fNovo = new Funcionario(
+                nomeInseridoFun,
+                idadeInseridaFun,
+                enderecoInseridoFun,
+                codigoInseridoFun,
+                salarioInseridoFun);
+        arrayListaFun.add(fNovo);
+
+        modeloFun.addRow(new Object[]{
+                fNovo.nome, fNovo.idade, fNovo.endereco,fNovo.codigoDeRegistro, fNovo.salario}
+        );
+    }
+
+    public void setSalvarPro(ActionEvent e) {
+        String nomeInseridoPro = addNomePro.getText();
+        String descriInseridaPro = addDescriPro.getText();
+        String precoInseridoProString = addPrecoPro.getText();
+        double precoInseridoPro = Double.parseDouble(precoInseridoProString);
+        String importadeInseridoProString = addImportPro.getText();
+        boolean importadoInseridoPro;
+        if(importadeInseridoProString == "s") {
+            importadoInseridoPro = true;
+        }
+        else {
+            importadoInseridoPro = false;
+        }
+        String codigoInseridoProString = addCodigoPro.getText();
+        Integer codigoInseridoPro = Integer.parseInt(codigoInseridoProString);
+
+        Produto pNovo = new Produto(
+                nomeInseridoPro,
+                descriInseridaPro,
+                precoInseridoPro,
+                importadoInseridoPro,
+                codigoInseridoPro);
+        arrayListaPro.add(pNovo);
+
+        modeloPro.addRow(new Object[]{
+                pNovo.nome, pNovo.descricao, pNovo.preco,pNovo.importado, pNovo.codigoProduto}
         );
     }
 
@@ -943,7 +1050,7 @@ public class Tela extends JFrame implements ActionListener{
                             cliente.cpf,
                             cliente.telefone}
                     );
-                    }
+                }
             }
         }
     }
