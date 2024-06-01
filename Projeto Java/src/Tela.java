@@ -819,7 +819,10 @@ public class Tela extends JFrame implements ActionListener{
         cancelarCli.addActionListener(this::setCancelarCli);
         salvarCli.addActionListener(this::setSalvarCli);
         pesquisarCli.addActionListener(this::setPesquisarCli);
-
+        maisNovo.addActionListener(this::setMaisNovo);
+        maisVelho.addActionListener(this::setMaisVelho);
+        acima60.addActionListener(this::setAcima60);
+        abaixo18.addActionListener(this::setAbaixo18);
 
         adicionarFun.addActionListener(this::setAdicionarFun);
         removerFun.addActionListener(this::setRemoverFun);
@@ -1041,6 +1044,81 @@ public class Tela extends JFrame implements ActionListener{
             }
         }
     }
+
+    public void setMaisNovo(ActionEvent e) {
+        modeloCli.setRowCount(0);
+        int idadeMaisNovo = arrayListaCli.getFirst().idade;
+        for (Cliente cliente : arrayListaCli) {
+            if (cliente.idade < idadeMaisNovo) {
+                idadeMaisNovo = cliente.idade;
+            }
+        }
+        for (Cliente cliente :arrayListaCli) {
+            if (cliente.idade == idadeMaisNovo) {
+                modeloCli.addRow(new Object[]{
+                        cliente.nome,
+                        cliente.idade,
+                        cliente.endereco,
+                        cliente.cpf,
+                        cliente.telefone}
+                );
+            }
+        }
+    }
+
+    public void setMaisVelho(ActionEvent e) {
+        modeloCli.setRowCount(0);
+        int idadeMaisVelho = arrayListaCli.getFirst().idade;
+        for (Cliente cliente : arrayListaCli) {
+            if (cliente.idade > idadeMaisVelho) {
+                idadeMaisVelho = cliente.idade;
+            }
+        }
+        for (Cliente cliente :arrayListaCli) {
+            if (cliente.idade == idadeMaisVelho) {
+                modeloCli.addRow(new Object[]{
+                        cliente.nome,
+                        cliente.idade,
+                        cliente.endereco,
+                        cliente.cpf,
+                        cliente.telefone}
+                );
+            }
+        }
+    }
+
+    public void setAcima60(ActionEvent e) {
+        modeloCli.setRowCount(0);
+        for (Cliente cliente : arrayListaCli) {
+            if (cliente.idade >= 60) {
+                modeloCli.addRow(new Object[]{
+                        cliente.nome,
+                        cliente.idade,
+                        cliente.endereco,
+                        cliente.cpf,
+                        cliente.telefone});
+            }
+        }
+    }
+
+    public void setAbaixo18(ActionEvent e) {
+        modeloCli.setRowCount(0);
+        for (Cliente cliente : arrayListaCli) {
+            if (cliente.idade <= 18) {
+                modeloCli.addRow(new Object[]{
+                        cliente.nome,
+                        cliente.idade,
+                        cliente.endereco,
+                        cliente.cpf,
+                        cliente.telefone});
+            }
+        }
+    }
+
+    public void setMediaIdade(ActionEvent e) {
+
+    }
+
 
     public void setPesquisarFun(ActionEvent e) {
 
