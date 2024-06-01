@@ -832,6 +832,8 @@ public class Tela extends JFrame implements ActionListener{
         cancelarPro.addActionListener(this::setCancelarPro);
         salvarPro.addActionListener(this::setSalvarPro);
         pesquisarNomePro.addActionListener(this::setPesquisarNomePro);
+        pesquisarDescriPro.addActionListener(this::setPesquisarDescriPro);
+        pesquisarPrecoPro.addActionListener(this::setPesquisarPrecoPro);
 
 
         //tela recebe os paineis
@@ -1090,6 +1092,67 @@ public class Tela extends JFrame implements ActionListener{
             for(Produto produto : arrayListaPro){
                 if (produto.nome.startsWith(pesquisarNomePro.getText())) {
 
+                    modeloPro.addRow(new Object[]{
+                            produto.nome,
+                            produto.descricao,
+                            produto.preco,
+                            produto.importado,
+                            produto.codigoProduto}
+                    );
+                }
+            }
+        }
+    }
+
+    public void setPesquisarDescriPro(ActionEvent e) {
+
+        if(pesquisarDescriPro.getText().isEmpty()) {
+            modeloPro.setRowCount(0);
+            for(Produto produto : arrayListaPro){
+                modeloPro.addRow(new Object[]{
+                        produto.nome,
+                        produto.descricao,
+                        produto.preco,
+                        produto.importado,
+                        produto.codigoProduto}
+                );
+            }
+        }
+        else {
+            modeloPro.setRowCount(0);
+            for(Produto produto : arrayListaPro){
+                if (produto.descricao.startsWith(pesquisarDescriPro.getText())) {
+
+                    modeloPro.addRow(new Object[]{
+                            produto.nome,
+                            produto.descricao,
+                            produto.preco,
+                            produto.importado,
+                            produto.codigoProduto}
+                    );
+                }
+            }
+        }
+    }
+
+    public void setPesquisarPrecoPro(ActionEvent e) {
+
+        if(pesquisarPrecoPro.getText().isEmpty()) {
+            modeloPro.setRowCount(0);
+            for(Produto produto : arrayListaPro){
+                modeloPro.addRow(new Object[]{
+                        produto.nome,
+                        produto.descricao,
+                        produto.preco,
+                        produto.importado,
+                        produto.codigoProduto}
+                );
+            }
+        }
+        else {
+            modeloPro.setRowCount(0);
+            for(Produto produto : arrayListaPro){
+                if (produto.preco == Double.parseDouble(pesquisarPrecoPro.getText())) {
                     modeloPro.addRow(new Object[]{
                             produto.nome,
                             produto.descricao,
