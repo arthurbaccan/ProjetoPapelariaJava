@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Tela extends JFrame implements ActionListener{
 
@@ -91,13 +92,11 @@ public class Tela extends JFrame implements ActionListener{
     JTextField addDescriPro;
     JTextField addPrecoPro;
     JTextField addImportPro;
-    JTextField addCodigoPro;
 
     JLabel nomePro;
     JLabel descriPro;
     JLabel precoPro;
     JLabel importPro;
-    JLabel codigoPro;
 
     JButton salvarPro;
     JButton cancelarPro;
@@ -425,8 +424,6 @@ public class Tela extends JFrame implements ActionListener{
                 new Object[]{"Nome", "Idade", "Endereço", "Código", "Salário"}, 0
         );
 
-        modeloFun.addRow(new Object[]{"nome","idade","endereço", "código", "salário"});
-
         listaFun = new JTable(modeloFun);
 
         scrollListaFun = new JScrollPane(listaFun);
@@ -662,8 +659,6 @@ public class Tela extends JFrame implements ActionListener{
                 new Object[]{"Nome", "Descrição", "Preço", "Importado", "Código"}, 0
         );
 
-        modeloPro.addRow(new Object[]{"nome","descrição","preço", "importado", "código"});
-
         listaPro = new JTable(modeloPro);
 
         scrollListaPro = new JScrollPane(listaPro);
@@ -787,49 +782,26 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro2.insets = new Insets(20, 0, 0, 20);
         menuPro.add(addImportPro, gbcPro2);
 
-        codigoPro = new JLabel("Insira código:");
-        codigoPro.setFont(new Font("Arial", Font.BOLD, 12));
-        gbcPro2.gridx = 0;
-        gbcPro2.gridy = 4;
-        gbcPro2.gridwidth = 1;
-        gbcPro2.gridheight = 1;
-        gbcPro2.weightx = 0;
-        gbcPro2.weighty = 0;
-        gbcPro2.fill = GridBagConstraints.NONE;
-        gbcPro2.insets = new Insets(20, 0, 0, 0);
-        menuPro.add(codigoPro, gbcPro2);
-
-        addCodigoPro = new JTextField();
-        gbcPro2.gridx = 1;
-        gbcPro2.gridy = 4;
-        gbcPro2.gridwidth = 1;
-        gbcPro2.gridheight = 1;
-        gbcPro2.weightx = 1;
-        gbcPro2.weighty = 0;
-        gbcPro2.fill = GridBagConstraints.BOTH;
-        gbcPro2.insets = new Insets(20, 0, 0, 20);
-        menuPro.add(addCodigoPro, gbcPro2);
-
         salvarPro = new JButton("Salvar");
         gbcPro2.gridx = 0;
-        gbcPro2.gridy = 5;
+        gbcPro2.gridy = 4;
         gbcPro2.gridwidth = 1;
         gbcPro2.gridheight = 1;
         gbcPro2.weightx = 0;
         gbcPro2.weighty = 0;
         gbcPro2.fill = GridBagConstraints.NONE;
-        gbcPro2.insets = new Insets(40, 10, 0, 0);
+        gbcPro2.insets = new Insets(80, 10, 0, 0);
         menuPro.add(salvarPro, gbcPro2);
 
         cancelarPro = new JButton("Cancelar");
         gbcPro2.gridx = 1;
-        gbcPro2.gridy = 5;
+        gbcPro2.gridy = 4;
         gbcPro2.gridwidth = 1;
         gbcPro2.gridheight = 1;
         gbcPro2.weightx = 0;
         gbcPro2.weighty = 0;
         gbcPro2.fill = GridBagConstraints.NONE;
-        gbcPro2.insets = new Insets(40, 0, 0, 0);
+        gbcPro2.insets = new Insets(80, 0, 0, 0);
         menuPro.add(cancelarPro, gbcPro2);
 
         menuCli.setVisible(false);
@@ -853,12 +825,13 @@ public class Tela extends JFrame implements ActionListener{
         removerFun.addActionListener(this::setRemoverFun);
         cancelarFun.addActionListener(this::setCancelarFun);
         salvarFun.addActionListener(this::setSalvarFun);
+        pesquisarFun.addActionListener(this::setPesquisarFun);
 
         adicionarPro.addActionListener(this::setAdicionarPro);
         removerPro.addActionListener(this::setRemoverPro);
         cancelarPro.addActionListener(this::setCancelarPro);
         salvarPro.addActionListener(this::setSalvarPro);
-
+        pesquisarNomePro.addActionListener(this::setPesquisarNomePro);
 
 
         //tela recebe os paineis
@@ -938,7 +911,7 @@ public class Tela extends JFrame implements ActionListener{
                 }
             }
             if (funcionarioParaRemover != null) {
-                arrayListaCli.remove(funcionarioParaRemover);
+                arrayListaFun.remove(funcionarioParaRemover);
             }
             modeloFun.removeRow(selectedRowFun);
         }
@@ -946,8 +919,20 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setRemoverPro(ActionEvent e) {
         int selectedRowPro = listaPro.getSelectedRow();
+        int codigoSelected = (int) listaPro.getValueAt(listaPro.getSelectedRow(), 4);
+
 
         if(selectedRowPro != -1) {
+            Produto produtoParaRemover = null;
+            for (Produto produto : arrayListaPro) {
+
+                if(produto.codigoProduto == (codigoSelected)) {
+                    produtoParaRemover = produto;
+                }
+            }
+            if (produtoParaRemover != null) {
+                arrayListaPro.remove(produtoParaRemover);
+            }
             modeloPro.removeRow(selectedRowPro);
         }
     }
@@ -1001,22 +986,22 @@ public class Tela extends JFrame implements ActionListener{
         String precoInseridoProString = addPrecoPro.getText();
         double precoInseridoPro = Double.parseDouble(precoInseridoProString);
         String importadeInseridoProString = addImportPro.getText();
-        boolean importadoInseridoPro;
-        if(importadeInseridoProString == "s") {
+        boolean importadoInseridoPro = false;
+        if(Objects.equals(importadeInseridoProString, "s")) {
             importadoInseridoPro = true;
         }
-        else {
+        else if(Objects.equals(importadeInseridoProString, "n")) {
             importadoInseridoPro = false;
         }
-        String codigoInseridoProString = addCodigoPro.getText();
-        Integer codigoInseridoPro = Integer.parseInt(codigoInseridoProString);
+        else {
+            //exception com mensagem
+        }
 
         Produto pNovo = new Produto(
                 nomeInseridoPro,
                 descriInseridaPro,
                 precoInseridoPro,
-                importadoInseridoPro,
-                codigoInseridoPro);
+                importadoInseridoPro);
         arrayListaPro.add(pNovo);
 
         modeloPro.addRow(new Object[]{
@@ -1055,7 +1040,67 @@ public class Tela extends JFrame implements ActionListener{
         }
     }
 
+    public void setPesquisarFun(ActionEvent e) {
 
+        if(pesquisarFun.getText().isEmpty()) {
+            modeloFun.setRowCount(0);
+            for(Funcionario funcionario : arrayListaFun){
+                modeloFun.addRow(new Object[]{
+                        funcionario.nome,
+                        funcionario.idade,
+                        funcionario.endereco,
+                        funcionario.codigoDeRegistro,
+                        funcionario.salario}
+                );
+            }
+        }
+        else {
+            modeloFun.setRowCount(0);
+            for(Funcionario funcionario : arrayListaFun){
+                if (funcionario.nome.startsWith(pesquisarFun.getText())) {
+
+                    modeloFun.addRow(new Object[]{
+                            funcionario.nome,
+                            funcionario.idade,
+                            funcionario.endereco,
+                            funcionario.codigoDeRegistro,
+                            funcionario.salario}
+                    );
+                }
+            }
+        }
+    }
+
+    public void setPesquisarNomePro(ActionEvent e) {
+
+        if(pesquisarNomePro.getText().isEmpty()) {
+            modeloPro.setRowCount(0);
+            for(Produto produto : arrayListaPro){
+                modeloPro.addRow(new Object[]{
+                        produto.nome,
+                        produto.descricao,
+                        produto.preco,
+                        produto.importado,
+                        produto.codigoProduto}
+                );
+            }
+        }
+        else {
+            modeloPro.setRowCount(0);
+            for(Produto produto : arrayListaPro){
+                if (produto.nome.startsWith(pesquisarNomePro.getText())) {
+
+                    modeloPro.addRow(new Object[]{
+                            produto.nome,
+                            produto.descricao,
+                            produto.preco,
+                            produto.importado,
+                            produto.codigoProduto}
+                    );
+                }
+            }
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -5,7 +5,7 @@ public class Produto {
     protected boolean importado;
     protected static int maiorCodigo = 0;
 
-    public Produto(String nome, String descricao, double preco, boolean importado, int codigoProduto) {
+    public Produto(String nome, String descricao, double preco, boolean importado) {
         checaNome(nome);
         this.nome = nome;
         checaDescricao(descricao);
