@@ -867,27 +867,37 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setRemoverCli(ActionEvent e) {
-        int selectRowCli = listaCli.getSelectedRow();
-
-        if(selectRowCli != -1) {
-            arrayListaCli.remove(selectRowCli);
-            modeloCli.removeRow(selectRowCli);
+        int selectedRowCli = listaCli.getSelectedRow();
+        String cpfSelected = (String) listaCli.getValueAt(listaCli.getSelectedRow(), 3);
+        
+        
+        if(selectedRowCli != -1) {
+            Cliente clienteParaRemover = null;
+            for (Cliente cliente : arrayListaCli) {
+                if(cliente.cpf.startsWith(cpfSelected)) {
+                    clienteParaRemover = cliente;
+                }
+            }
+            if (clienteParaRemover != null) {
+                arrayListaCli.remove(clienteParaRemover);
+            }
+            modeloCli.removeRow(selectedRowCli);
         }
     }
 
     public void setRemoverFun(ActionEvent e) {
-        int selectRowFun = listaFun.getSelectedRow();
+        int selectedRowFun = listaFun.getSelectedRow();
 
-        if(selectRowFun != -1) {
-            modeloFun.removeRow(selectRowFun);
+        if(selectedRowFun != -1) {
+            modeloFun.removeRow(selectedRowFun);
         }
     }
 
     public void setRemoverPro(ActionEvent e) {
-        int selectRowPro = listaPro.getSelectedRow();
+        int selectedRowPro = listaPro.getSelectedRow();
 
-        if(selectRowPro != -1) {
-            modeloPro.removeRow(selectRowPro);
+        if(selectedRowPro != -1) {
+            modeloPro.removeRow(selectedRowPro);
         }
     }
 
@@ -925,6 +935,7 @@ public class Tela extends JFrame implements ActionListener{
             modeloCli.setRowCount(0);
             for(Cliente cliente : arrayListaCli){
                 if (cliente.nome.startsWith(pesquisarCli.getText())) {
+
                     modeloCli.addRow(new Object[]{
                             cliente.nome,
                             cliente.idade,
