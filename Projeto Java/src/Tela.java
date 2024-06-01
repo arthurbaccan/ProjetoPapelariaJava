@@ -213,6 +213,9 @@ public class Tela extends JFrame implements ActionListener{
         );
 
         listaCli = new JTable(modeloCli);
+        listaCli.getTableHeader().setReorderingAllowed(false);
+
+        listaCli.getTableHeader().setResizingAllowed(false);
 
         scrollListaCli = new JScrollPane(listaCli);
 
@@ -425,6 +428,9 @@ public class Tela extends JFrame implements ActionListener{
         );
 
         listaFun = new JTable(modeloFun);
+        listaFun.getTableHeader().setReorderingAllowed(false);
+
+        listaFun.getTableHeader().setResizingAllowed(false);
 
         scrollListaFun = new JScrollPane(listaFun);
 
@@ -660,6 +666,9 @@ public class Tela extends JFrame implements ActionListener{
         );
 
         listaPro = new JTable(modeloPro);
+
+        listaPro.getTableHeader().setResizingAllowed(false);
+        listaPro.getTableHeader().setReorderingAllowed(false);
 
         scrollListaPro = new JScrollPane(listaPro);
 
