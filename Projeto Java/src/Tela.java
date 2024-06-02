@@ -1023,17 +1023,31 @@ public class Tela extends JFrame implements ActionListener{
         }
 
         if(exception==0) {
-            Cliente clNovo = new Cliente(
-                    nomeInseridoCli,
-                    idadeInseridaCli,
-                    enderecoInseridoCli,
-                    cpfInseridoCli,
-                    telefoneInseridoCli);
-            arrayListaCli.add(clNovo);
+            int cpfUnico=0;
+            for(Cliente cliente :arrayListaCli) {
+                if(cliente.cpf.equals(cpfInseridoCli)) {
+                    cpfUnico++;
+                }
+            }
+            if(cpfUnico==0) {
+                Cliente clNovo = new Cliente(
+                        nomeInseridoCli,
+                        idadeInseridaCli,
+                        enderecoInseridoCli,
+                        cpfInseridoCli,
+                        telefoneInseridoCli);
+                arrayListaCli.add(clNovo);
 
-            modeloCli.addRow(new Object[]{
-                    clNovo.nome, clNovo.idade, clNovo.endereco, clNovo.cpf, clNovo.telefone}
-            );
+                modeloCli.addRow(new Object[]{
+                        clNovo.nome, clNovo.idade, clNovo.endereco, clNovo.cpf, clNovo.telefone}
+                );
+            }
+            else {
+                JOptionPane.showMessageDialog(null,
+                        "Já existe um cliente com esse CPF",
+                        "Erro ao salvar Cliente",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
         else {
             JOptionPane.showMessageDialog(null,
