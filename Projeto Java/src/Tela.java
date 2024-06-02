@@ -974,25 +974,91 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setSalvarFun(ActionEvent e) {
+        int exception=0;
+
+        //erro se o nome for vazio
         String nomeInseridoFun = addNomeFun.getText();
+        Integer idadeInseridaFun=0;
+        if (nomeInseridoFun.isEmpty()) {
+            exception++;
+        }
+        //erro se idade for vazio ou não for um numero, erro se for menor ou igual a 0
         String idadeInseridaFunString = addIdadeFun.getText();
-        Integer idadeInseridaFun = Integer.parseInt(idadeInseridaFunString);
+        if(idadeInseridaFunString.isEmpty()) {
+            exception++;
+        }
+        else {
+            try {
+                idadeInseridaFun = Integer.parseInt(idadeInseridaFunString);
+            } catch(NumberFormatException a) {
+                exception++;
+            }
+            if(idadeInseridaFun<=0) {
+                exception++;
+            }
+        }
+        //erro se endereco for vazio
         String enderecoInseridoFun = addEnderecoFun.getText();
+        if(enderecoInseridoFun.isEmpty()) {
+            exception++;
+        }
+        //erro se o codigo do funcionario for vazio
         String codigoInseridoFun = addCodigoFun.getText();
+        if(codigoInseridoFun.isEmpty()) {
+            exception++;
+        }
+        //erro se o salario for vazio/ não for numero/ menor ou igual a 0
         String salarioInseridoFunString = addSalario.getText();
-        double salarioInseridoFun = Double.parseDouble(salarioInseridoFunString);
+        double salarioInseridoFun=0;
+        if(salarioInseridoFunString.isEmpty()) {
+            exception++;
+        }
+        else {
+            try {
+                salarioInseridoFun = Double.parseDouble(salarioInseridoFunString);
+            } catch (NumberFormatException a) {
+                exception++;
+            }
+            if(salarioInseridoFun<=0) {
+                exception++;
+            }
+        }
+        if(exception==0) {
+            int codigoValido=0;
+            //erro se ja tiver um funcionario com esse codigo de registro
+            for(Funcionario funcionario : arrayListaFun) {
+                if(funcionario.codigoDeRegistro.equals(codigoInseridoFun)) {
+                    codigoValido++;
+                }
+            }
+                if (codigoValido==0) {
+                    Funcionario fNovo = new Funcionario(
+                            nomeInseridoFun,
+                            idadeInseridaFun,
+                            enderecoInseridoFun,
+                            codigoInseridoFun,
+                            salarioInseridoFun);
+                    arrayListaFun.add(fNovo);
 
-        Funcionario fNovo = new Funcionario(
-                nomeInseridoFun,
-                idadeInseridaFun,
-                enderecoInseridoFun,
-                codigoInseridoFun,
-                salarioInseridoFun);
-        arrayListaFun.add(fNovo);
-
-        modeloFun.addRow(new Object[]{
-                fNovo.nome, fNovo.idade, fNovo.endereco,fNovo.codigoDeRegistro, fNovo.salario}
-        );
+                    modeloFun.addRow(new Object[]{
+                            fNovo.nome, fNovo.idade, fNovo.endereco, fNovo.codigoDeRegistro, fNovo.salario}
+                    );
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,
+                            "Já existe um funcionário com esse código",
+                            "Erro ao salvar Funcionário",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+        }
+        else {
+            JOptionPane.showMessageDialog(null,
+                    "Verifique se há algum campo vazio ou que não faça sentido:\n" +
+                            "Idade só aceita números inteiros positivos\n" +
+                            "Salário só aceita números positivos",
+                    "Erro ao salvar Funcionário",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void setSalvarPro(ActionEvent e) {
@@ -1036,6 +1102,7 @@ public class Tela extends JFrame implements ActionListener{
         else {
             exception++;
         }
+        //se exception for 0, ele adiciona normalmente, se não, exibe uma mensagem de erro
         if(exception==0) {
             Produto pNovo = new Produto(
                     nomeInseridoPro,
@@ -1043,7 +1110,6 @@ public class Tela extends JFrame implements ActionListener{
                     precoInseridoPro,
                     importadoInseridoPro);
             arrayListaPro.add(pNovo);
-
             modeloPro.addRow(new Object[]{
                     pNovo.nome, pNovo.descricao, pNovo.preco, pNovo.importado, pNovo.codigoProduto}
             );
@@ -1051,12 +1117,11 @@ public class Tela extends JFrame implements ActionListener{
         else {
             JOptionPane.showMessageDialog(null,
                     "Verifique se há algum campo vazio ou que não faça sentido:\n" +
-                            "Preço só aceita números\n" +
+                            "Preço só aceita números positivos\n" +
                             "Importado só aceita 's' ou 'n'",
                     "Erro ao salvar Produto",
                     JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     public void setPesquisarCli(ActionEvent e) {
