@@ -1260,6 +1260,7 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setMaisNovo(ActionEvent e) {
+        pesquisarCli.setText(null);
         modeloCli.setRowCount(0);
         if(arrayListaCli.isEmpty()) {
             JOptionPane.showMessageDialog(null,
@@ -1289,6 +1290,7 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setMaisVelho(ActionEvent e) {
+        pesquisarCli.setText(null);
         modeloCli.setRowCount(0);
         if(arrayListaCli.isEmpty()) {
             JOptionPane.showMessageDialog(null,
@@ -1318,6 +1320,7 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setAcima60(ActionEvent e) {
+        pesquisarCli.setText(null);
         modeloCli.setRowCount(0);
         if(arrayListaCli.isEmpty()) {
             JOptionPane.showMessageDialog(null,
@@ -1340,6 +1343,7 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setAbaixo18(ActionEvent e) {
+        pesquisarCli.setText(null);
         modeloCli.setRowCount(0);
         if(arrayListaCli.isEmpty()) {
             JOptionPane.showMessageDialog(null,
@@ -1411,6 +1415,8 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setPesquisarNomePro(ActionEvent e) {
 
+        pesquisarDescriPro.setText(null);
+        pesquisarPrecoPro.setText(null);
         if(pesquisarNomePro.getText().isEmpty()) {
             modeloPro.setRowCount(0);
             for(Produto produto : arrayListaPro){
@@ -1442,6 +1448,8 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setPesquisarDescriPro(ActionEvent e) {
 
+        pesquisarNomePro.setText(null);
+        pesquisarPrecoPro.setText(null);
         if(pesquisarDescriPro.getText().isEmpty()) {
             modeloPro.setRowCount(0);
             for(Produto produto : arrayListaPro){
@@ -1473,6 +1481,8 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setPesquisarPrecoPro(ActionEvent e) {
 
+        pesquisarNomePro.setText(null);
+        pesquisarDescriPro.setText(null);
         if(pesquisarPrecoPro.getText().isEmpty()) {
             modeloPro.setRowCount(0);
             for(Produto produto : arrayListaPro){
