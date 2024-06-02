@@ -1261,70 +1261,102 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setMaisNovo(ActionEvent e) {
         modeloCli.setRowCount(0);
-        int idadeMaisNovo = arrayListaCli.getFirst().idade;
-        for (Cliente cliente : arrayListaCli) {
-            if (cliente.idade < idadeMaisNovo) {
-                idadeMaisNovo = cliente.idade;
-            }
+        if(arrayListaCli.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Não há clientes",
+                    "Erro ao exibir cliente mais novo",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        for (Cliente cliente :arrayListaCli) {
-            if (cliente.idade == idadeMaisNovo) {
-                modeloCli.addRow(new Object[]{
-                        cliente.nome,
-                        cliente.idade,
-                        cliente.endereco,
-                        cliente.cpf,
-                        cliente.telefone}
-                );
+        else {
+            int idadeMaisNovo = arrayListaCli.getFirst().idade;
+            for (Cliente cliente : arrayListaCli) {
+                if (cliente.idade < idadeMaisNovo) {
+                    idadeMaisNovo = cliente.idade;
+                }
+            }
+            for (Cliente cliente : arrayListaCli) {
+                if (cliente.idade == idadeMaisNovo) {
+                    modeloCli.addRow(new Object[]{
+                            cliente.nome,
+                            cliente.idade,
+                            cliente.endereco,
+                            cliente.cpf,
+                            cliente.telefone}
+                    );
+                }
             }
         }
     }
 
     public void setMaisVelho(ActionEvent e) {
         modeloCli.setRowCount(0);
-        int idadeMaisVelho = arrayListaCli.getFirst().idade;
-        for (Cliente cliente : arrayListaCli) {
-            if (cliente.idade > idadeMaisVelho) {
-                idadeMaisVelho = cliente.idade;
-            }
+        if(arrayListaCli.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Não há clientes",
+                    "Erro ao exibir cliente mais velho",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        for (Cliente cliente :arrayListaCli) {
-            if (cliente.idade == idadeMaisVelho) {
-                modeloCli.addRow(new Object[]{
-                        cliente.nome,
-                        cliente.idade,
-                        cliente.endereco,
-                        cliente.cpf,
-                        cliente.telefone}
-                );
+        else {
+            int idadeMaisVelho = arrayListaCli.getFirst().idade;
+            for (Cliente cliente : arrayListaCli) {
+                if (cliente.idade > idadeMaisVelho) {
+                    idadeMaisVelho = cliente.idade;
+                }
+            }
+            for (Cliente cliente : arrayListaCli) {
+                if (cliente.idade == idadeMaisVelho) {
+                    modeloCli.addRow(new Object[]{
+                            cliente.nome,
+                            cliente.idade,
+                            cliente.endereco,
+                            cliente.cpf,
+                            cliente.telefone}
+                    );
+                }
             }
         }
     }
 
     public void setAcima60(ActionEvent e) {
         modeloCli.setRowCount(0);
-        for (Cliente cliente : arrayListaCli) {
-            if (cliente.idade >= 60) {
-                modeloCli.addRow(new Object[]{
-                        cliente.nome,
-                        cliente.idade,
-                        cliente.endereco,
-                        cliente.cpf,
-                        cliente.telefone});
+        if(arrayListaCli.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Não há clientes",
+                    "Erro ao exibir clientes maiores de 60",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            for (Cliente cliente : arrayListaCli) {
+                if (cliente.idade >= 60) {
+                    modeloCli.addRow(new Object[]{
+                            cliente.nome,
+                            cliente.idade,
+                            cliente.endereco,
+                            cliente.cpf,
+                            cliente.telefone});
+                }
             }
         }
     }
 
     public void setAbaixo18(ActionEvent e) {
         modeloCli.setRowCount(0);
-        for (Cliente cliente : arrayListaCli) {
-            if (cliente.idade <= 18) {
-                modeloCli.addRow(new Object[]{
-                        cliente.nome,
-                        cliente.idade,
-                        cliente.endereco,
-                        cliente.cpf,
-                        cliente.telefone});
+        if(arrayListaCli.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Não há clientes",
+                    "Erro ao exibir clientes menores de 18",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            for (Cliente cliente : arrayListaCli) {
+                if (cliente.idade < 18) {
+                    modeloCli.addRow(new Object[]{
+                            cliente.nome,
+                            cliente.idade,
+                            cliente.endereco,
+                            cliente.cpf,
+                            cliente.telefone});
+                }
             }
         }
     }
@@ -1335,7 +1367,15 @@ public class Tela extends JFrame implements ActionListener{
             mediaIdade += cliente.idade;
         }
         mediaIdade = mediaIdade/(arrayListaCli.size());
-        JOptionPane.showMessageDialog(null, "Média de idade dos clientes: "+mediaIdade);
+        if(arrayListaCli.isEmpty()){
+            JOptionPane.showMessageDialog(null,
+                    "Não há clientes",
+                    "Erro ao calcular a média de idade",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Média de idade dos clientes: " + mediaIdade);
+        }
     }
 
     public void setPesquisarFun(ActionEvent e) {
