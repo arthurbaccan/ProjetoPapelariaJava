@@ -1058,6 +1058,12 @@ public class Tela extends JFrame implements ActionListener{
                 modeloCli.addRow(new Object[]{
                         clNovo.nome, clNovo.idade, clNovo.endereco, clNovo.cpf, clNovo.telefone}
                 );
+
+                addNomeCli.setText("");
+                addIdadeCli.setText("");
+                addEnderecoCli.setText("");
+                addCpfCli.setText("");
+                addTelefoneCli.setText("");
             }
             else {
                 JOptionPane.showMessageDialog(null,
@@ -1147,6 +1153,12 @@ public class Tela extends JFrame implements ActionListener{
                     modeloFun.addRow(new Object[]{
                             fNovo.nome, fNovo.idade, fNovo.endereco, fNovo.codigoDeRegistro, fNovo.salario}
                     );
+
+                    addNomeFun.setText("");
+                    addIdadeFun.setText("");
+                    addEnderecoFun.setText("");
+                    addCodigoFun.setText("");
+                    addSalario.setText("");
                 }
                 else {
                     JOptionPane.showMessageDialog(null,
@@ -1217,6 +1229,10 @@ public class Tela extends JFrame implements ActionListener{
             modeloPro.addRow(new Object[]{
                     pNovo.nome, pNovo.descricao, pNovo.preco, pNovo.importado, pNovo.codigoProduto}
             );
+            addNomePro.setText("");
+            addDescriPro.setText("");
+            addPrecoPro.setText("");
+            addImportPro.setText("");
         }
         else {
             JOptionPane.showMessageDialog(null,
