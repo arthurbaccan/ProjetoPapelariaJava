@@ -953,24 +953,97 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setSalvarCli(ActionEvent e) {
+        int exception = 0;
+
+        //erro se o nome for vazio
         String nomeInseridoCli = addNomeCli.getText();
+        if (nomeInseridoCli.isEmpty()) {
+            exception++;
+        }
+        //erro se idade for vazio ou não for um numero, erro se for menor ou igual a 0
         String idadeInseridaCliString = addIdadeCli.getText();
-        Integer idadeInseridaCli = Integer.parseInt(idadeInseridaCliString);
+        Integer idadeInseridaCli = 0;
+        if (idadeInseridaCliString.isEmpty()) {
+            exception++;
+        }
+        else {
+            try {
+                idadeInseridaCli = Integer.parseInt(idadeInseridaCliString);
+            } catch (NumberFormatException a) {
+                exception++;
+            }
+            if (idadeInseridaCli <= 0) {
+                exception++;
+            }
+        }
+        //erro se endereco for vazio
         String enderecoInseridoCli = addEnderecoCli.getText();
+        if (enderecoInseridoCli.isEmpty()) {
+            exception++;
+        }
+        //erro se cpf for vazio/ nao tiver exatamente 11 digitos/ nao ser apenas numeros inteiros
         String cpfInseridoCli = addCpfCli.getText();
+        Long cpfValido=0l;
+        if (cpfInseridoCli.isEmpty()) {
+            exception++;
+        }
+        else if (cpfInseridoCli.length() != 11) {
+            exception++;
+        }
+        else {
+            try {
+                cpfValido = Long.parseLong(cpfInseridoCli);
+            } catch (NumberFormatException a) {
+                exception++;
+            }
+            if(cpfValido<=0) {
+                exception++;
+            }
+        }
+
+        //erro se telefone for vazio/ nao tiver exatamente 8 digitos/ nao ser apenas numeros inteiros
         String telefoneInseridoCli = addTelefoneCli.getText();
+        Long telefoneValido=0l;
+        if (telefoneInseridoCli.isEmpty())
+        {
+            exception++;
+        }
+        else if (telefoneInseridoCli.length() != 8) {
+            exception++;
+        }
+        else {
+            try {
+                telefoneValido = Long.parseLong(telefoneInseridoCli);
+            } catch (NumberFormatException a) {
+                exception++;
+            }
+            if(telefoneValido<=0) {
+                exception++;
+            }
+        }
 
-        Cliente clNovo = new Cliente(
-                nomeInseridoCli,
-                idadeInseridaCli,
-                enderecoInseridoCli,
-                cpfInseridoCli,
-                telefoneInseridoCli);
-        arrayListaCli.add(clNovo);
+        if(exception==0) {
+            Cliente clNovo = new Cliente(
+                    nomeInseridoCli,
+                    idadeInseridaCli,
+                    enderecoInseridoCli,
+                    cpfInseridoCli,
+                    telefoneInseridoCli);
+            arrayListaCli.add(clNovo);
 
-        modeloCli.addRow(new Object[]{
-                clNovo.nome, clNovo.idade, clNovo.endereco,clNovo.cpf, clNovo.telefone}
-        );
+            modeloCli.addRow(new Object[]{
+                    clNovo.nome, clNovo.idade, clNovo.endereco, clNovo.cpf, clNovo.telefone}
+            );
+        }
+        else {
+            JOptionPane.showMessageDialog(null,
+                    "Verifique se há algum campo vazio ou que não faça sentido:\n" +
+                            "Idade só aceita números inteiros positivos\n" +
+                            "Cpf só aceita um número inteiro de 11 dígitos\n" +
+                            "Telefone só aceita um número inteiro de 8 dígitos",
+                    "Erro ao salvar Cliente",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void setSalvarFun(ActionEvent e) {
@@ -978,12 +1051,12 @@ public class Tela extends JFrame implements ActionListener{
 
         //erro se o nome for vazio
         String nomeInseridoFun = addNomeFun.getText();
-        Integer idadeInseridaFun=0;
         if (nomeInseridoFun.isEmpty()) {
             exception++;
         }
         //erro se idade for vazio ou não for um numero, erro se for menor ou igual a 0
         String idadeInseridaFunString = addIdadeFun.getText();
+        Integer idadeInseridaFun=0;
         if(idadeInseridaFunString.isEmpty()) {
             exception++;
         }
