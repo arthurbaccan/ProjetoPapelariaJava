@@ -996,12 +996,37 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setSalvarPro(ActionEvent e) {
+        int exception=0;
+
+        //Erro se o nome for vazio
         String nomeInseridoPro = addNomePro.getText();
+        if(nomeInseridoPro.isEmpty()){
+            exception++;
+        }
+        //Erro se a descricao for vazia
         String descriInseridaPro = addDescriPro.getText();
+        if(descriInseridaPro.isEmpty()){
+            exception++;
+        }
+        //Erro se o preco for uma letra ou vazio, caso seja um numero, erro se for menor ou igual a 0
         String precoInseridoProString = addPrecoPro.getText();
-        double precoInseridoPro = Double.parseDouble(precoInseridoProString);
+        double precoInseridoPro = 0;
+        if(precoInseridoProString.isEmpty()){
+            exception++;
+        }
+        else {
+            try {
+                precoInseridoPro = Double.parseDouble(precoInseridoProString);
+            } catch (NumberFormatException a) {
+                exception++;
+            }
+            if (precoInseridoPro <= 0) {
+                exception++;
+            }
+        }
+        //Erro se o importado não for "s" ou "n"
         String importadeInseridoProString = addImportPro.getText();
-        boolean importadoInseridoPro = false;
+        boolean importadoInseridoPro=false;
         if(Objects.equals(importadeInseridoProString, "s")) {
             importadoInseridoPro = true;
         }
@@ -1009,19 +1034,29 @@ public class Tela extends JFrame implements ActionListener{
             importadoInseridoPro = false;
         }
         else {
-            //exception com mensagem
+            exception++;
+        }
+        if(exception==0) {
+            Produto pNovo = new Produto(
+                    nomeInseridoPro,
+                    descriInseridaPro,
+                    precoInseridoPro,
+                    importadoInseridoPro);
+            arrayListaPro.add(pNovo);
+
+            modeloPro.addRow(new Object[]{
+                    pNovo.nome, pNovo.descricao, pNovo.preco, pNovo.importado, pNovo.codigoProduto}
+            );
+        }
+        else {
+            JOptionPane.showMessageDialog(null,
+                    "Verifique se há algum campo vazio ou que não faça sentido:\n" +
+                            "Preço só aceita números\n" +
+                            "Importado só aceita 's' ou 'n'",
+                    "Erro ao salvar Produto",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
-        Produto pNovo = new Produto(
-                nomeInseridoPro,
-                descriInseridaPro,
-                precoInseridoPro,
-                importadoInseridoPro);
-        arrayListaPro.add(pNovo);
-
-        modeloPro.addRow(new Object[]{
-                pNovo.nome, pNovo.descricao, pNovo.preco,pNovo.importado, pNovo.codigoProduto}
-        );
     }
 
     public void setPesquisarCli(ActionEvent e) {
