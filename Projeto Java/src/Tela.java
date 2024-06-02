@@ -895,29 +895,34 @@ public class Tela extends JFrame implements ActionListener{
 
     public void setRemoverCli(ActionEvent e) {
         int selectedRowCli = listaCli.getSelectedRow();
-        String cpfSelected = (String) listaCli.getValueAt(listaCli.getSelectedRow(), 3);
-        
-        
         if(selectedRowCli != -1) {
+            String cpfSelected = (String) listaCli.getValueAt(listaCli.getSelectedRow(), 3);
             Cliente clienteParaRemover = null;
+
             for (Cliente cliente : arrayListaCli) {
-                if(cliente.cpf.startsWith(cpfSelected)) {
-                    clienteParaRemover = cliente;
+                if (cliente.cpf.startsWith(cpfSelected)) {
+                        clienteParaRemover = cliente;
                 }
             }
+
             if (clienteParaRemover != null) {
                 arrayListaCli.remove(clienteParaRemover);
             }
             modeloCli.removeRow(selectedRowCli);
         }
+        else {
+            JOptionPane.showMessageDialog(null,
+                    "Selecione um item da lista",
+                    "Erro ao remover",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+        }
     }
 
     public void setRemoverFun(ActionEvent e) {
         int selectedRowFun = listaFun.getSelectedRow();
-        String codigoSelected = (String) listaFun.getValueAt(listaFun.getSelectedRow(), 3);
-
-
         if(selectedRowFun != -1) {
+            String codigoSelected = (String) listaFun.getValueAt(listaFun.getSelectedRow(), 3);
             Funcionario funcionarioParaRemover = null;
             for (Funcionario funcionario : arrayListaFun) {
 
@@ -930,14 +935,19 @@ public class Tela extends JFrame implements ActionListener{
             }
             modeloFun.removeRow(selectedRowFun);
         }
+        else {
+            JOptionPane.showMessageDialog(null,
+                    "Selecione um item da lista",
+                    "Erro ao remover",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     public void setRemoverPro(ActionEvent e) {
         int selectedRowPro = listaPro.getSelectedRow();
-        int codigoSelected = (int) listaPro.getValueAt(listaPro.getSelectedRow(), 4);
-
-
         if(selectedRowPro != -1) {
+            int codigoSelected = (int) listaPro.getValueAt(listaPro.getSelectedRow(), 4);
             Produto produtoParaRemover = null;
             for (Produto produto : arrayListaPro) {
 
@@ -949,6 +959,13 @@ public class Tela extends JFrame implements ActionListener{
                 arrayListaPro.remove(produtoParaRemover);
             }
             modeloPro.removeRow(selectedRowPro);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,
+                    "Selecione um item da lista",
+                    "Erro ao remover",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 
