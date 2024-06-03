@@ -214,6 +214,7 @@ public class Tela extends JFrame implements ActionListener{
 
         listaCli = new JTable(modeloCli);
         listaCli.getTableHeader().setReorderingAllowed(false);
+        listaCli.setDefaultEditor(Object.class, null);
 
         listaCli.getTableHeader().setResizingAllowed(false);
 
@@ -429,6 +430,7 @@ public class Tela extends JFrame implements ActionListener{
 
         listaFun = new JTable(modeloFun);
         listaFun.getTableHeader().setReorderingAllowed(false);
+        listaFun.setDefaultEditor(Object.class, null);
 
         listaFun.getTableHeader().setResizingAllowed(false);
 
@@ -669,6 +671,7 @@ public class Tela extends JFrame implements ActionListener{
 
         listaPro.getTableHeader().setResizingAllowed(false);
         listaPro.getTableHeader().setReorderingAllowed(false);
+        listaPro.setDefaultEditor(Object.class, null);
 
         scrollListaPro = new JScrollPane(listaPro);
 
@@ -983,6 +986,9 @@ public class Tela extends JFrame implements ActionListener{
         if (idadeInseridaCliString.isEmpty()) {
             exception++;
         }
+        else if(idadeInseridaCliString.length() > 3) {
+            exception++;
+        }
         else {
             try {
                 idadeInseridaCli = Integer.parseInt(idadeInseridaCliString);
@@ -1025,7 +1031,7 @@ public class Tela extends JFrame implements ActionListener{
         {
             exception++;
         }
-        else if (telefoneInseridoCli.length() != 8) {
+        else if (telefoneInseridoCli.length() < 8 || telefoneInseridoCli.length() > 9) {
             exception++;
         }
         else {
@@ -1075,9 +1081,9 @@ public class Tela extends JFrame implements ActionListener{
         else {
             JOptionPane.showMessageDialog(null,
                     "Verifique se há algum campo vazio ou que não faça sentido:\n" +
-                            "Idade só aceita números inteiros positivos\n" +
+                            "Idade só aceita números inteiros positivos com 3 digitos ou menos\n" +
                             "Cpf só aceita um número inteiro de 11 dígitos\n" +
-                            "Telefone só aceita um número inteiro de 8 dígitos",
+                            "Telefone só aceita um número inteiro de 8 ou 9 dígitos",
                     "Erro ao salvar Cliente",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -1095,6 +1101,9 @@ public class Tela extends JFrame implements ActionListener{
         String idadeInseridaFunString = addIdadeFun.getText();
         Integer idadeInseridaFun=0;
         if(idadeInseridaFunString.isEmpty()) {
+            exception++;
+        }
+        else if(idadeInseridaFunString.length() > 3) {
             exception++;
         }
         else {
@@ -1170,7 +1179,7 @@ public class Tela extends JFrame implements ActionListener{
         else {
             JOptionPane.showMessageDialog(null,
                     "Verifique se há algum campo vazio ou que não faça sentido:\n" +
-                            "Idade só aceita números inteiros positivos\n" +
+                            "Idade só aceita números inteiros positivos com 3 digitos ou menos\n" +
                             "Salário só aceita números positivos",
                     "Erro ao salvar Funcionário",
                     JOptionPane.ERROR_MESSAGE);
