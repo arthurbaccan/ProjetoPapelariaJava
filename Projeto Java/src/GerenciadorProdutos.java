@@ -1,5 +1,6 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,10 +11,12 @@ public class GerenciadorProdutos {
     private static final int PESQUISAR_PRODUTO_NOME = 3;
     private static final int PESQUISAR_PRODUTO_DESCRICAO = 4;
     private static final int PESQUISAR_PRODUTO_PRECO = 5;
-
     private static final int PESQUISAR_PRODUTO_MAIS_CARO = 6;
-    private static final int MOSTRAR_TODOS = 7;
-    public static final int SAIR = 8;
+    private static final int PESQUISAR_PRODUTO_MAIS_BARATO = 7;
+    private static final int MOSTRAR_MEDIA_PRECO = 8;
+    private static final int PESQUISAR_PRODUTO_ACIMA_MEDIA = 9;
+    private static final int MOSTRAR_TODOS = 10;
+    public static final int SAIR = 11;
 
     public static boolean importadoConvert(String s)
     {
@@ -83,6 +86,7 @@ public class GerenciadorProdutos {
                     }
                     GerenciadorProdutos.remover(produtoARemover);
                 }
+                break;
 
                 case MOSTRAR_TODOS: {
                     GerenciadorProdutos.mostrarTodos();
@@ -114,7 +118,25 @@ public class GerenciadorProdutos {
                 break;
 
                 case PESQUISAR_PRODUTO_MAIS_CARO: {
+                    System.out.println("Produto mais caro:");
                     mostrarMaisCaro();
+                }
+                break;
+
+                case PESQUISAR_PRODUTO_MAIS_BARATO: {
+                    System.out.println("Produto mais barato:");
+                    mostrarMaisBarato();
+                }
+                break;
+
+                case MOSTRAR_MEDIA_PRECO: {
+                    mostrarMediaPreco();
+                }
+                break;
+
+                case PESQUISAR_PRODUTO_ACIMA_MEDIA:
+                {
+                    mostrarQtdAcimaMedia();
                 }
                 break;
 
@@ -153,7 +175,7 @@ public class GerenciadorProdutos {
     public static void mostrarMaisCaro()
     {
         double produtoMaisCaro = listaProdutos.getFirst().preco;
-        Produto prodObjectMaisCaro = null;
+        Produto prodObjectMaisCaro = listaProdutos.getFirst();
         for (Produto produto : listaProdutos) {
             if (produto.preco > produtoMaisCaro) {
                 produtoMaisCaro = produto.preco;
@@ -167,6 +189,51 @@ public class GerenciadorProdutos {
             System.out.println("Nenhum produto encontrado!");
         }
     }
+
+    public static void mostrarQtdAcimaMedia() {
+        double mediaPreco = calcularMediaPreco();
+        int qtdAcimaMedia = 0;
+        for (Produto produto : listaProdutos) {
+            if (produto.preco > mediaPreco)
+            {
+                qtdAcimaMedia++;
+            }
+        }
+        System.out.println("Quantidade de produtos acima da média de preço: " + qtdAcimaMedia);
+    }
+
+    public static void mostrarMaisBarato()
+    {
+        double produtoMaisBarato = listaProdutos.getFirst().preco;
+        Produto prodObjectMaisBarato = listaProdutos.getFirst();
+        for (Produto produto : listaProdutos) {
+            if (produto.preco < produtoMaisBarato) {
+                produtoMaisBarato = produto.preco;
+                prodObjectMaisBarato = produto;
+            }
+        }
+
+        try {
+            prodObjectMaisBarato.exibir();
+        } catch (NullPointerException e)
+        {
+            System.out.println("Nenhum produto encontrado!");
+        }
+    }
+
+    public static double calcularMediaPreco()
+    {
+        double mediaPreco = 0;
+        for (Produto produto : listaProdutos) {
+            mediaPreco += produto.preco;
+        }
+        return mediaPreco / (listaProdutos.size());
+    }
+    public static void mostrarMediaPreco() {
+        double mediaPreco = calcularMediaPreco();
+        System.out.println("Média de preço: " + mediaPreco);
+    }
+
 
     public static void pesquisarPorPreco(double preco)
     {
@@ -213,7 +280,10 @@ public class GerenciadorProdutos {
         System.out.println("Pesquisar produto por nome ["+ PESQUISAR_PRODUTO_NOME +"]");
         System.out.println("Pesquisar produto por descrição ["+ PESQUISAR_PRODUTO_DESCRICAO +"]");
         System.out.println("Pesquisar produto por preço ["+ PESQUISAR_PRODUTO_PRECO +"]");
-        System.out.println("Pesquisar produto mais caro ["+ PESQUISAR_PRODUTO_MAIS_CARO+"]");
+        System.out.println("Mostrar produto mais caro ["+ PESQUISAR_PRODUTO_MAIS_CARO+"]");
+        System.out.println("Mostrar produto mais barato ["+ PESQUISAR_PRODUTO_MAIS_BARATO+"]");
+        System.out.println("Mostrar preco médio ["+ MOSTRAR_MEDIA_PRECO +"]");
+        System.out.println("Mostrar quantidade de produtos acima da média de preço ["+ PESQUISAR_PRODUTO_ACIMA_MEDIA+"]");
         System.out.println("Mostrar todos os produtos ["+ MOSTRAR_TODOS +"]");
         System.out.println("Sair ["+ SAIR +"]");
     }
