@@ -899,7 +899,10 @@ public class Tela extends JFrame implements ActionListener{
         pesquisarNomePro.addActionListener(this::setPesquisarNomePro);
         pesquisarDescriPro.addActionListener(this::setPesquisarDescriPro);
         pesquisarPrecoPro.addActionListener(this::setPesquisarPrecoPro);
-
+        maisCaroPro.addActionListener(this::setMaisCaroPro);
+        maisBaratoPro.addActionListener(this::setMaisBaratoPro);
+        mediaPrecoPro.addActionListener(this::setMediaPrecoPro);
+        qtdAcimaMedia.addActionListener(this::setQtdAcimaMedia);
 
         //tela recebe os paineis
         jFrame.add(tabbedPane, BorderLayout.CENTER);
@@ -1573,6 +1576,117 @@ public class Tela extends JFrame implements ActionListener{
             modeloPro.setRowCount(0);
             for(Produto produto : arrayListaPro){
                 if (produto.preco == Double.parseDouble(pesquisarPrecoPro.getText())) {
+                    modeloPro.addRow(new Object[]{
+                            produto.nome,
+                            produto.descricao,
+                            produto.preco,
+                            produto.importado,
+                            produto.codigoProduto}
+                    );
+                }
+            }
+        }
+    }
+
+    public void setMaisCaroPro(ActionEvent e) {
+        pesquisarDescriPro.setText(null);
+        pesquisarPrecoPro.setText(null);
+        pesquisarNomePro.setText(null);
+        modeloPro.setRowCount(0);
+
+        if(arrayListaPro.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Não há produtos",
+                    "Erro ao exibir produto mais caro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            double produtoMaisCaro = arrayListaPro.getFirst().preco;
+            for (Produto produto : arrayListaPro) {
+                if (produto.preco > produtoMaisCaro) {
+                    produtoMaisCaro = produto.preco;
+                }
+            }
+            for (Produto produto : arrayListaPro) {
+                if (produto.preco == produtoMaisCaro) {
+                    modeloPro.addRow(new Object[]{
+                            produto.nome,
+                            produto.descricao,
+                            produto.preco,
+                            produto.importado,
+                            produto.codigoProduto}
+                    );
+                }
+            }
+        }
+    }
+
+    public void setMaisBaratoPro(ActionEvent e) {
+        pesquisarDescriPro.setText(null);
+        pesquisarPrecoPro.setText(null);
+        pesquisarNomePro.setText(null);
+        modeloPro.setRowCount(0);
+
+        if(arrayListaPro.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Não há produtos",
+                    "Erro ao exibir produto mais barato",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            double produtoMaisBarato = arrayListaPro.getFirst().preco;
+            for (Produto produto : arrayListaPro) {
+                if (produto.preco < produtoMaisBarato) {
+                    produtoMaisBarato = produto.preco;
+                }
+            }
+            for (Produto produto : arrayListaPro) {
+                if (produto.preco == produtoMaisBarato) {
+                    modeloPro.addRow(new Object[]{
+                            produto.nome,
+                            produto.descricao,
+                            produto.preco,
+                            produto.importado,
+                            produto.codigoProduto}
+                    );
+                }
+            }
+        }
+    }
+
+    public void setMediaPrecoPro(ActionEvent e) {
+        double mediaPreco=0;
+        for(Produto produto : arrayListaPro) {
+            mediaPreco += produto.preco;
+        }
+        mediaPreco = mediaPreco/(arrayListaPro.size());
+        if(arrayListaPro.isEmpty()){
+            JOptionPane.showMessageDialog(null,
+                    "Não há produtos",
+                    "Erro ao calcular a média de preço",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Média de preço dos produtos: " + mediaPreco);
+        }
+    }
+
+    public void setQtdAcimaMedia(ActionEvent e) {
+        double mediaPreco=0;
+        for(Produto produto : arrayListaPro) {
+            mediaPreco += produto.preco;
+        }
+        mediaPreco = mediaPreco/(arrayListaPro.size());
+        if(arrayListaPro.isEmpty()){
+            JOptionPane.showMessageDialog(null,
+                    "Não há produtos",
+                    "Erro ao contabilizar produtos acima da média",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            modeloPro.setRowCount(0);
+            for (Produto produto : arrayListaPro) {
+                if (produto.preco > mediaPreco) {
                     modeloPro.addRow(new Object[]{
                             produto.nome,
                             produto.descricao,
