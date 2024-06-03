@@ -1,3 +1,4 @@
+import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -80,6 +81,10 @@ public class Tela extends JFrame implements ActionListener{
     PlaceholderTextField pesquisarPrecoPro;
     JButton adicionarPro;
     JButton removerPro;
+    JButton maisCaroPro;
+    JButton maisBaratoPro;
+    JButton mediaPrecoPro;
+    JButton qtdAcimaMedia;
 
     //lista produto
     JPanel menuPro;
@@ -611,7 +616,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.gridy = 0;
         gbcPro.gridwidth = 1;
         gbcPro.gridheight = 1;
-        gbcPro.weightx = 1;
+        gbcPro.weightx = 0;
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.anchor = GridBagConstraints.NORTHWEST;
@@ -623,7 +628,7 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.gridy = 0;
         gbcPro.gridwidth = 1;
         gbcPro.gridheight = 1;
-        gbcPro.weightx = 1;
+        gbcPro.weightx = 0;
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.insets = new Insets(10, 7, 0, 0);
@@ -634,13 +639,13 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.gridy = 0;
         gbcPro.gridwidth = 1;
         gbcPro.gridheight = 1;
-        gbcPro.weightx = 1;
+        gbcPro.weightx = 0;
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.BOTH;
         gbcPro.insets = new Insets(10, 7, 0, 0);
         produtoPanel.add(pesquisarPrecoPro, gbcPro);
 
-        adicionarPro = new JButton("Adicionar");
+        adicionarPro = new JButton("    Adicionar    ");
         gbcPro.gridx = 3;
         gbcPro.gridy = 0;
         gbcPro.gridwidth = 1;
@@ -656,11 +661,55 @@ public class Tela extends JFrame implements ActionListener{
         gbcPro.gridy = 0;
         gbcPro.gridwidth = 1;
         gbcPro.gridheight = 1;
-        gbcPro.weightx = 0;
+        gbcPro.weightx = 1;
         gbcPro.weighty = 0;
         gbcPro.fill = GridBagConstraints.NONE;
         gbcPro.insets = new Insets(10, 7, 0, 4);
         produtoPanel.add(removerPro, gbcPro);
+
+        maisCaroPro = new JButton(" Mais Caro ");
+        gbcPro.gridx = 0;
+        gbcPro.gridy = 1;
+        gbcPro.gridwidth = 1;
+        gbcPro.gridheight = 1;
+        gbcPro.weightx = 0;
+        gbcPro.weighty = 0;
+        gbcPro.fill = GridBagConstraints.NONE;
+        gbcPro.insets = new Insets(10, 7, 0, 4);
+        produtoPanel.add(maisCaroPro, gbcPro);
+
+        maisBaratoPro = new JButton("   Mais Barato   ");
+        gbcPro.gridx = 1;
+        gbcPro.gridy = 1;
+        gbcPro.gridwidth = 1;
+        gbcPro.gridheight = 1;
+        gbcPro.weightx = 0;
+        gbcPro.weighty = 0;
+        gbcPro.fill = GridBagConstraints.NONE;
+        gbcPro.insets = new Insets(10, 7, 0, 4);
+        produtoPanel.add(maisBaratoPro, gbcPro);
+
+        mediaPrecoPro = new JButton("Media Preço");
+        gbcPro.gridx = 2;
+        gbcPro.gridy = 1;
+        gbcPro.gridwidth = 1;
+        gbcPro.gridheight = 1;
+        gbcPro.weightx = 0;
+        gbcPro.weighty = 0;
+        gbcPro.fill = GridBagConstraints.NONE;
+        gbcPro.insets = new Insets(10, 7, 0, 4);
+        produtoPanel.add(mediaPrecoPro, gbcPro);
+
+        qtdAcimaMedia = new JButton("Preços Acima");
+        gbcPro.gridx = 3;
+        gbcPro.gridy = 1;
+        gbcPro.gridwidth = 1;
+        gbcPro.gridheight = 1;
+        gbcPro.weightx = 0;
+        gbcPro.weighty = 0;
+        gbcPro.fill = GridBagConstraints.NONE;
+        gbcPro.insets = new Insets(10, 7, 0, 4);
+        produtoPanel.add(qtdAcimaMedia, gbcPro);
 
         // Dados da tabela
         modeloPro = new DefaultTableModel(
@@ -677,7 +726,7 @@ public class Tela extends JFrame implements ActionListener{
 
         // Adiciona a tabela na parte esquerda
         gbcPro.gridx = 0;
-        gbcPro.gridy = 1;
+        gbcPro.gridy = 2;
         gbcPro.gridwidth = 5;
         gbcPro.gridheight = 1;
         gbcPro.weightx = 0;
