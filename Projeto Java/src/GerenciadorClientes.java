@@ -18,7 +18,7 @@ public abstract class GerenciadorClientes{
 
     public static String lerNome(Scanner teclado) {
         teclado.nextLine();
-        System.out.println("Digite o nome do Funcionário");
+        System.out.println("Digite o nome do Cliente");
         String nome = teclado.nextLine();
         Pessoa.verificaNome(nome);
         return nome;
