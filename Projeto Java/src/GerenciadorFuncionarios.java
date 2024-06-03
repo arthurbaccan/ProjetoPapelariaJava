@@ -17,7 +17,7 @@ public abstract class GerenciadorFuncionarios {
             switch(comando) {
                 case ADICIONAR_FUNCIONARIO: {
 
-                    String nome = GerenciadorClientes.lerNome(teclado);
+                    String nome = GerenciadorClientes.lerNome(teclado, "Digite o nome do Funcionário");
                     int idade = GerenciadorClientes.lerIdade(teclado);
                     String endereco = GerenciadorClientes.lerEndereco(teclado);
                     System.out.println("Digite o código de resgitro");

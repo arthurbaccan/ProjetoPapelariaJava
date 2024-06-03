@@ -16,9 +16,9 @@ public abstract class GerenciadorClientes{
     private static final int MOSTRAR_TODOS = 9;
     public static final int SAIR = 10;
 
-    public static String lerNome(Scanner teclado) {
+    public static String lerNome(Scanner teclado, String message) {
         teclado.nextLine();
-        System.out.println("Digite o nome do Cliente");
+        System.out.println(message);
         String nome = teclado.nextLine();
         Pessoa.verificaNome(nome);
         return nome;
@@ -49,7 +49,7 @@ public abstract class GerenciadorClientes{
             {
                 case ADICIONAR_CLIENTE:
                 {
-                    String nome = lerNome(teclado);
+                    String nome = lerNome(teclado, "Digite o nome do Cliente");
                     int idade = lerIdade(teclado);
                     String endereco = lerEndereco(teclado);
                     System.out.println("Digite o CPF");
@@ -115,6 +115,7 @@ public abstract class GerenciadorClientes{
                         if (menorIdade == -1)
                         {
                             menorIdade = cliente.idade;
+                            clienteMaisNovo = cliente;
                         }
                         else if (cliente.idade < menorIdade) {
                             clienteMaisNovo = cliente;
@@ -159,14 +160,14 @@ public abstract class GerenciadorClientes{
                 }break;
 
                 case MOSTRAR_MEDIA_IDADE: {
-                    int i = listaClientes.size() / 2;
+                    int i = listaClientes.size();
                     double idade = 0;
                     for(Cliente cliente: listaClientes)
                     {
-                        cliente.idade += idade;
+                        idade += cliente.idade;
                     }
                     System.out.println("Media: " + idade/i);
-                }
+                } break;
 
                 case PESQUISAR_CLIENTE:
                 {

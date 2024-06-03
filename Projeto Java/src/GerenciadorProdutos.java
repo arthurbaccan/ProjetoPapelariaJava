@@ -10,8 +10,10 @@ public class GerenciadorProdutos {
     private static final int PESQUISAR_PRODUTO_NOME = 3;
     private static final int PESQUISAR_PRODUTO_DESCRICAO = 4;
     private static final int PESQUISAR_PRODUTO_PRECO = 5;
-    private static final int MOSTRAR_TODOS = 6;
-    public static final int SAIR = 7;
+
+    private static final int PESQUISAR_PRODUTO_MAIS_CARO = 6;
+    private static final int MOSTRAR_TODOS = 7;
+    public static final int SAIR = 8;
 
     public static boolean importadoConvert(String s)
     {
@@ -111,6 +113,11 @@ public class GerenciadorProdutos {
                 }
                 break;
 
+                case PESQUISAR_PRODUTO_MAIS_CARO: {
+                    mostrarMaisCaro();
+                }
+                break;
+
             }
         }
         catch (NomeVazioException e)
@@ -140,6 +147,24 @@ public class GerenciadorProdutos {
         for(Produto produto : listaProdutos) {
             if (produto.descricao.startsWith(descricaoProduto))
                 produto.exibir();
+        }
+    }
+
+    public static void mostrarMaisCaro()
+    {
+        double produtoMaisCaro = listaProdutos.getFirst().preco;
+        Produto prodObjectMaisCaro = null;
+        for (Produto produto : listaProdutos) {
+            if (produto.preco > produtoMaisCaro) {
+                produtoMaisCaro = produto.preco;
+                prodObjectMaisCaro = produto;
+            }
+        }
+        try {
+            prodObjectMaisCaro.exibir();
+        } catch (NullPointerException e)
+        {
+            System.out.println("Nenhum produto encontrado!");
         }
     }
 
@@ -188,6 +213,7 @@ public class GerenciadorProdutos {
         System.out.println("Pesquisar produto por nome ["+ PESQUISAR_PRODUTO_NOME +"]");
         System.out.println("Pesquisar produto por descrição ["+ PESQUISAR_PRODUTO_DESCRICAO +"]");
         System.out.println("Pesquisar produto por preço ["+ PESQUISAR_PRODUTO_PRECO +"]");
+        System.out.println("Pesquisar produto mais caro ["+ PESQUISAR_PRODUTO_MAIS_CARO+"]");
         System.out.println("Mostrar todos os produtos ["+ MOSTRAR_TODOS +"]");
         System.out.println("Sair ["+ SAIR +"]");
     }
