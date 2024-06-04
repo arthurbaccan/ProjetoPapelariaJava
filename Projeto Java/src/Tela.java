@@ -1346,14 +1346,8 @@ public class Tela extends JFrame implements ActionListener{
                     JOptionPane.ERROR_MESSAGE);
         }
         else {
-            int idadeMaisNovo = arrayListaCli.getFirst().idade;
-            for (Cliente cliente : arrayListaCli) {
-                if (cliente.idade < idadeMaisNovo) {
-                    idadeMaisNovo = cliente.idade;
-                }
-            }
-            for (Cliente cliente : arrayListaCli) {
-                if (cliente.idade == idadeMaisNovo) {
+            Cliente cliente = GerenciadorClientes.getClienteMaisNovo(arrayListaCli);
+
                     modeloCli.addRow(new Object[]{
                             cliente.nome,
                             cliente.idade,
@@ -1361,8 +1355,8 @@ public class Tela extends JFrame implements ActionListener{
                             cliente.cpf,
                             cliente.telefone}
                     );
-                }
-            }
+
+
         }
     }
 
@@ -1376,14 +1370,8 @@ public class Tela extends JFrame implements ActionListener{
                     JOptionPane.ERROR_MESSAGE);
         }
         else {
-            int idadeMaisVelho = arrayListaCli.getFirst().idade;
-            for (Cliente cliente : arrayListaCli) {
-                if (cliente.idade > idadeMaisVelho) {
-                    idadeMaisVelho = cliente.idade;
-                }
-            }
-            for (Cliente cliente : arrayListaCli) {
-                if (cliente.idade == idadeMaisVelho) {
+            Cliente cliente = GerenciadorClientes.getCliMaisVelho(arrayListaCli);
+
                     modeloCli.addRow(new Object[]{
                             cliente.nome,
                             cliente.idade,
@@ -1391,8 +1379,8 @@ public class Tela extends JFrame implements ActionListener{
                             cliente.cpf,
                             cliente.telefone}
                     );
-                }
-            }
+
+
         }
     }
 
@@ -1443,11 +1431,7 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setMediaIdade(ActionEvent e) {
-        double mediaIdade=0;
-        for(Cliente cliente : arrayListaCli) {
-            mediaIdade += cliente.idade;
-        }
-        mediaIdade = mediaIdade/(arrayListaCli.size());
+        double mediaIdade = GerenciadorClientes.getMediaIdade(arrayListaCli);
         if(arrayListaCli.isEmpty()){
             JOptionPane.showMessageDialog(null,
                     "Não há clientes",
@@ -1601,23 +1585,17 @@ public class Tela extends JFrame implements ActionListener{
                     JOptionPane.ERROR_MESSAGE);
         }
         else {
-            double produtoMaisCaro = arrayListaPro.getFirst().preco;
-            for (Produto produto : arrayListaPro) {
-                if (produto.preco > produtoMaisCaro) {
-                    produtoMaisCaro = produto.preco;
-                }
-            }
-            for (Produto produto : arrayListaPro) {
-                if (produto.preco == produtoMaisCaro) {
-                    modeloPro.addRow(new Object[]{
-                            produto.nome,
-                            produto.descricao,
-                            produto.preco,
-                            produto.importado,
-                            produto.codigoProduto}
+
+            Produto produtoMaisCaro = GerenciadorProdutos.getProdMaisCaro(arrayListaPro);
+
+            modeloPro.addRow(new Object[]{
+                            produtoMaisCaro.nome,
+                            produtoMaisCaro.descricao,
+                            produtoMaisCaro.preco,
+                            produtoMaisCaro.importado,
+                            produtoMaisCaro.codigoProduto}
                     );
-                }
-            }
+
         }
     }
 
@@ -1634,32 +1612,22 @@ public class Tela extends JFrame implements ActionListener{
                     JOptionPane.ERROR_MESSAGE);
         }
         else {
-            double produtoMaisBarato = arrayListaPro.getFirst().preco;
-            for (Produto produto : arrayListaPro) {
-                if (produto.preco < produtoMaisBarato) {
-                    produtoMaisBarato = produto.preco;
-                }
-            }
-            for (Produto produto : arrayListaPro) {
-                if (produto.preco == produtoMaisBarato) {
-                    modeloPro.addRow(new Object[]{
-                            produto.nome,
-                            produto.descricao,
-                            produto.preco,
-                            produto.importado,
-                            produto.codigoProduto}
+            Produto produtoMaisBarato = GerenciadorProdutos.getProdutoMaisBarato(arrayListaPro);
+
+            modeloPro.addRow(new Object[]{
+                            produtoMaisBarato.nome,
+                            produtoMaisBarato.descricao,
+                            produtoMaisBarato.preco,
+                            produtoMaisBarato.importado,
+                            produtoMaisBarato.codigoProduto}
                     );
-                }
-            }
+
+
         }
     }
 
     public void setMediaPrecoPro(ActionEvent e) {
-        double mediaPreco=0;
-        for(Produto produto : arrayListaPro) {
-            mediaPreco += produto.preco;
-        }
-        mediaPreco = mediaPreco/(arrayListaPro.size());
+        double mediaPreco = GerenciadorProdutos.calcularMediaPreco(arrayListaPro);
         if(arrayListaPro.isEmpty()){
             JOptionPane.showMessageDialog(null,
                     "Não há produtos",
@@ -1672,11 +1640,8 @@ public class Tela extends JFrame implements ActionListener{
     }
 
     public void setQtdAcimaMedia(ActionEvent e) {
-        double mediaPreco=0;
-        for(Produto produto : arrayListaPro) {
-            mediaPreco += produto.preco;
-        }
-        mediaPreco = mediaPreco/(arrayListaPro.size());
+        double mediaPreco = GerenciadorProdutos.calcularMediaPreco(arrayListaPro);
+
         if(arrayListaPro.isEmpty()){
             JOptionPane.showMessageDialog(null,
                     "Não há produtos",

@@ -172,7 +172,7 @@ public class GerenciadorProdutos {
         }
     }
 
-    public static void mostrarMaisCaro()
+    public static Produto getProdMaisCaro()
     {
         double produtoMaisCaro = listaProdutos.getFirst().preco;
         Produto prodObjectMaisCaro = listaProdutos.getFirst();
@@ -182,6 +182,25 @@ public class GerenciadorProdutos {
                 prodObjectMaisCaro = produto;
             }
         }
+        return prodObjectMaisCaro;
+    }
+
+    public static Produto getProdMaisCaro(ArrayList<Produto> listaProdutos)
+    {
+        double produtoMaisCaro = listaProdutos.getFirst().preco;
+        Produto prodObjectMaisCaro = listaProdutos.getFirst();
+        for (Produto produto : listaProdutos) {
+            if (produto.preco > produtoMaisCaro) {
+                produtoMaisCaro = produto.preco;
+                prodObjectMaisCaro = produto;
+            }
+        }
+        return prodObjectMaisCaro;
+    }
+
+    public static void mostrarMaisCaro()
+    {
+        Produto prodObjectMaisCaro = getProdMaisCaro();
         try {
             prodObjectMaisCaro.exibir();
         } catch (NullPointerException e)
@@ -202,7 +221,7 @@ public class GerenciadorProdutos {
         System.out.println("Quantidade de produtos acima da média de preço: " + qtdAcimaMedia);
     }
 
-    public static void mostrarMaisBarato()
+    public static Produto getProdutoMaisBarato()
     {
         double produtoMaisBarato = listaProdutos.getFirst().preco;
         Produto prodObjectMaisBarato = listaProdutos.getFirst();
@@ -213,12 +232,42 @@ public class GerenciadorProdutos {
             }
         }
 
+        return prodObjectMaisBarato;
+    }
+
+    public static Produto getProdutoMaisBarato(ArrayList<Produto> listaProdutos)
+    {
+        double produtoMaisBarato = listaProdutos.getFirst().preco;
+        Produto prodObjectMaisBarato = listaProdutos.getFirst();
+        for (Produto produto : listaProdutos) {
+            if (produto.preco < produtoMaisBarato) {
+                produtoMaisBarato = produto.preco;
+                prodObjectMaisBarato = produto;
+            }
+        }
+
+        return prodObjectMaisBarato;
+    }
+
+    public static void mostrarMaisBarato()
+    {
+        Produto prodObjectMaisBarato = getProdutoMaisBarato();
+
         try {
             prodObjectMaisBarato.exibir();
         } catch (NullPointerException e)
         {
             System.out.println("Nenhum produto encontrado!");
         }
+    }
+
+    public static double calcularMediaPreco(ArrayList<Produto> listaProdutos)
+    {
+        double mediaPreco = 0;
+        for (Produto produto : listaProdutos) {
+            mediaPreco += produto.preco;
+        }
+        return mediaPreco / (listaProdutos.size());
     }
 
     public static double calcularMediaPreco()
@@ -229,6 +278,8 @@ public class GerenciadorProdutos {
         }
         return mediaPreco / (listaProdutos.size());
     }
+
+
     public static void mostrarMediaPreco() {
         double mediaPreco = calcularMediaPreco();
         System.out.println("Média de preço: " + mediaPreco);

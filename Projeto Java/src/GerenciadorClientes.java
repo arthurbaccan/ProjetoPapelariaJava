@@ -85,16 +85,7 @@ public abstract class GerenciadorClientes{
 
                 case MOSTRAR_CLIENTE_MAIS_VELHO:
                 {
-                    int maiorIdade = -1;
-                    Cliente cliMaisVelho = null;
-                    for(Cliente cliente : listaClientes) {
-                        if (cliente.idade > maiorIdade)
-                        {
-                            cliMaisVelho = cliente;
-                            maiorIdade = cliente.idade;
-                        }
-
-                    }
+                    Cliente cliMaisVelho = getCliMaisVelho();
 
                     System.out.println("Cliente mais matioli(idoso): ");
                     try {
@@ -109,20 +100,7 @@ public abstract class GerenciadorClientes{
                 } break;
 
                 case MOSTRAR_CLIENTE_MAIS_NOVO: {
-                    int menorIdade = -1;
-                    Cliente clienteMaisNovo = null;
-                    for (Cliente cliente : listaClientes) {
-                        if (menorIdade == -1)
-                        {
-                            menorIdade = cliente.idade;
-                            clienteMaisNovo = cliente;
-                        }
-                        else if (cliente.idade < menorIdade) {
-                            clienteMaisNovo = cliente;
-                            menorIdade = cliente.idade;
-                        }
-
-                    }
+                    Cliente clienteMaisNovo = getClienteMaisNovo();
 
                     System.out.println("Cliente mais Arthur(criança): ");
                     try {
@@ -160,13 +138,8 @@ public abstract class GerenciadorClientes{
                 }break;
 
                 case MOSTRAR_MEDIA_IDADE: {
-                    int i = listaClientes.size();
-                    double idade = 0;
-                    for(Cliente cliente: listaClientes)
-                    {
-                        idade += cliente.idade;
-                    }
-                    System.out.println("Media: " + idade/i);
+
+                    System.out.println("Media: " + getMediaIdade());
                 } break;
 
                 case PESQUISAR_CLIENTE:
@@ -227,6 +200,70 @@ public abstract class GerenciadorClientes{
         }
     }
 
+    public static Cliente getClienteMaisNovo() {
+        int menorIdade = -1;
+        Cliente clienteMaisNovo = null;
+        for (Cliente cliente : listaClientes) {
+            if (menorIdade == -1)
+            {
+                menorIdade = cliente.idade;
+                clienteMaisNovo = cliente;
+            }
+            else if (cliente.idade < menorIdade) {
+                clienteMaisNovo = cliente;
+                menorIdade = cliente.idade;
+            }
+
+        }
+        return clienteMaisNovo;
+    }
+
+    public static Cliente getClienteMaisNovo(ArrayList<Cliente> listaClientes) {
+        int menorIdade = -1;
+        Cliente clienteMaisNovo = null;
+        for (Cliente cliente : listaClientes) {
+            if (menorIdade == -1)
+            {
+                menorIdade = cliente.idade;
+                clienteMaisNovo = cliente;
+            }
+            else if (cliente.idade < menorIdade) {
+                clienteMaisNovo = cliente;
+                menorIdade = cliente.idade;
+            }
+
+        }
+        return clienteMaisNovo;
+    }
+
+    public static Cliente getCliMaisVelho() {
+        int maiorIdade = -1;
+        Cliente cliMaisVelho = null;
+        for(Cliente cliente : listaClientes) {
+            if (cliente.idade > maiorIdade)
+            {
+                cliMaisVelho = cliente;
+                maiorIdade = cliente.idade;
+            }
+
+        }
+        return cliMaisVelho;
+    }
+
+    public static Cliente getCliMaisVelho(ArrayList<Cliente> listaClientes) {
+        int maiorIdade = -1;
+        Cliente cliMaisVelho = null;
+        for(Cliente cliente : listaClientes) {
+            if (cliente.idade > maiorIdade)
+            {
+                cliMaisVelho = cliente;
+                maiorIdade = cliente.idade;
+            }
+
+        }
+        return cliMaisVelho;
+    }
+
 
     public static void adicionar(Cliente cliente) {
         listaClientes.add(cliente);
@@ -254,12 +291,28 @@ public abstract class GerenciadorClientes{
 
     }
 
-    public static void getClienteMaisVelho()
+    public static double getMediaIdade()
     {
-        Cliente clienteEscolhido = null;
-        for(Cliente cliente : listaClientes) {
-
+        int i = listaClientes.size();
+        double idade = 0;
+        for(Cliente cliente: listaClientes)
+        {
+            idade += cliente.idade;
         }
+        return idade/i;
+
+    }
+
+    public static double getMediaIdade(ArrayList<Cliente> listaClientes)
+    {
+        int i = listaClientes.size();
+        double idade = 0;
+        for(Cliente cliente: listaClientes)
+        {
+            idade += cliente.idade;
+        }
+        return idade/i;
+
     }
 
     public static void mostrarComandos() {
